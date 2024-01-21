@@ -1,5 +1,11 @@
 {
+  "/not-found": "app/not-found.js",
+  "/option/page": "app/option/page.js",
+  "/teacher/[teacherid]/page": "app/teacher/[teacherid]/page.js",
   "/teacher/account/page": "app/teacher/account/page.js",
-  "/page": "app/page.js",
-  "/option/page": "app/option/page.js"
+  "/teacher/[teacherid]/createForm/page": "app/teacher/[teacherid]/createForm/page.js",
+  "/teacher/[teacherid]/CoursePage/page": "app/teacher/[teacherid]/CoursePage/page.js",
+  "/student/signin/page": "app/student/signin/page.js",
+  "/student/[studentid]/page": "app/student/[studentid]/page.js",
+  "/student/[studentid]/search/page": "app/student/[studentid]/search/page.js"
 }

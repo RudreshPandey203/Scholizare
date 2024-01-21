@@ -30,7 +30,6 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedMarker, setSelectedMarker] = useState(null); // [latitude, longitude
   const [center, setCenter] = useState({ lat: 0, lng: 0 }); // [latitude, longitude
   const [autoComplete, setAutoComplete] = useState(null);
   const [formData, setFormData] = useState({
@@ -123,11 +122,6 @@ const Page = () => {
   };
 
   useEffect(() => {
-    // if (selectedLocation) {
-    //   setCenter(selectedLocation);
-    // } else {
-    //   setCenter({ lat: formData.latitude, lng: formData.longitude });
-    // }
     const getAddress = async () => {
 
     setCenter({ lat: formData.latitude, lng: formData.longitude });
