@@ -1,6 +1,26 @@
-node_modules/
-.next/
-.swc/
-.*.env
-.env.local/
+# .gitignore
+.env.local
 
+# Next.js
+.next/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Logs
+logs/
+*.log
+
+# IDE
+.idea/
+*.sublime-workspace
+*.tmproj
+*.tmState
+*.code-workspace
+
+# Operating System Files
+.DS_Store
+Thumbs.db
