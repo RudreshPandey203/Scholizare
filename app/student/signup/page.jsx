@@ -73,46 +73,42 @@ const Signup = () => {
   return (
     <div
     className="flex flex-col text-center justify-center items-center w-full h-screen bg-cover"
-    style={{ backgroundImage: "url('/mainBG.png')" }}
+    style={{ backgroundImage: "url('/bg.png')" }}
     >
-      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url('/icon.png   ')" }}>
+      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url(' ')" }}>
       </div>
-      <div className="shadow-lg  h-content py-2 px-2 bg-white bg-opacity-10 rounded-3xl border border-black border-opacity-0 backdrop-blur-sm flex flex-col items-center justify-around gap-4 text-2xl font-jacques w-[30vw] h-[50vh]">
-      <h1 className="font-bold my-4 text-6xl text-[#9A62D7]">Register</h1>
-
+    <div className="shadow-lg  h-content py-2 px-2 bg-white bg-opacity-10 rounded-3xl border border-black border-opacity-0 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-4xl font-jacques">
+      <h1 className="font-bold my-4 text-6xl text-primary">Register</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4 pt-2 items-center">
+            <input
+                type="text"
+                placeholder="Full Name"
+                className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black"
+                onChange={(e) => setName(e.target.value)}
+            />
           <input
             type="text"
-            placeholder="Full Name"
-            value={name}
-            className=" border-2 rounded-md shadow outline p-2 placeholder:text-2xl placeholder:text-black"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Username"
-            value={email}
-            className=" border-2 rounded-md shadow outline p-2  placeholder:text-2xl placeholder:text-black"
+            placeholder="Email"
+            className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            className=" border-2 rounded-md shadow outline p-2 placeholder:text-2xl placeholder:text-black"
+            className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black"
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
             type="submit"
-            className="p-2 bg-bg text-3xl rounded-xl w-72 text-white font-bold cursor-pointer px-6 py-2"
+            className="p-2 bg-primary text-3xl rounded-3xl w-72 text-white font-bold cursor-pointer px-6 py-2 hover:bg-blue-600"
           >
             Register
           </button>
         </form>
-        {error && <div className="flex flex-col gap-3 px-4 py-3">{error}</div>}{" "}
-        <Link href="/student/signin" className="text-base  w-72">
-          Already have an account? <span className="text-bg">Login</span>
-        </Link>
+{       error && ( <div className="flex flex-col gap-3 px-4 py-3">{error}</div>)
+}        <Link href="/student/signin" className='text-base  w-72'>
+            Already have an account? <span className='text-primary'>Login</span>
+            </Link>
       </div>
     </div>
     // <div className="flex items-center justify-center h-screen bg-gray-900">

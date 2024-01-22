@@ -13,14 +13,25 @@ module.exports = {
         'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors:{
-        primary:"#F3ECFC",
-        secondary:"#D5AEFF",
+        primary:"#367CFF",
+        secondary:"#F0F5FF",
         bg:"#9A62D7",
       },
       fontFamily: {
-
         jacques: "Jacques Francois, serif",
         lalezar: "Lalezar, system-ui",
+      },
+      dropShadow: {
+        '3xl': '4px 3px 10px #E8E8E8',
+        '2xl': '0px 0px 5px #E8E8E8'
+      },
+      animation: {
+        shine: "shine 1s",
+      },
+      keyframes: {
+        shine: {
+          "100%": { left: "125%" },
+        },
       },
     },
   },
