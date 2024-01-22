@@ -243,7 +243,7 @@ const Page = () => {
               onLoad={(autoComplete) => setAutoComplete(autoComplete)}
               onPlaceChanged={() => handlePlaceSelect(autoComplete.getPlace())}
             >
-              <input
+              <input required
                 type="text"
                 placeholder="Search for places"
                 style={{
@@ -274,7 +274,7 @@ const Page = () => {
         >
           <label>
             DOB:
-            <input
+            <input required
               type="date"
               name="dob"
               value={formData.dob}
@@ -286,7 +286,7 @@ const Page = () => {
           <br />
           <label>
             Phone:
-            <input
+            <input required
               type="text"
               name="phone"
               value={formData.phone}
@@ -297,7 +297,7 @@ const Page = () => {
           <br />
           <label>
             Profile Picture:
-            <input
+            <input 
               accept="image/*"
               type="file"
               name="profilepic"
@@ -308,7 +308,7 @@ const Page = () => {
           <br />
           <label>
             Address:
-            <input
+            <input required
               type="text"
               name="address"
               value={formData.address}
@@ -319,7 +319,7 @@ const Page = () => {
           <br />
           <label>
             City:
-            <input
+            <input required
               type="text"
               name="city"
               value={formData.city}
@@ -330,7 +330,7 @@ const Page = () => {
           <br />
           <label>
             State:
-            <input
+            <input required
               type="text"
               name="state"
               value={formData.state}
@@ -341,7 +341,7 @@ const Page = () => {
           <br />
           <label>
             Pincode:
-            <input
+            <input required
               type="text"
               name="pincode"
               value={formData.pincode}
@@ -352,14 +352,14 @@ const Page = () => {
           <br />
           <label>
             Location:
-            <input
+            <input required
               type="text"
               name="latitude"
               value={formData.latitude}
               onChange={handleChange}
               autoComplete="latitude"
             />
-            <input
+            <input required
               type="text"
               name="longitude"
               value={formData.longitude}
@@ -390,7 +390,7 @@ const Page = () => {
           <br />
           <label>
             Class:
-            <input
+            <input required
               type="text"
               name="className"
               value={formData.className}
@@ -401,7 +401,7 @@ const Page = () => {
           <br />
           <label>
             School:
-            <input
+            <input required
               type="text"
               name="school"
               value={formData.school}
@@ -544,7 +544,7 @@ export default Page;
 //       <form className="flex flex-col text-center p-10 outline-dashed m-10 w-60" onSubmit={handleSubmit}>
 //         <label>
 //           DOB:
-//           <input
+//           <input required
 //             type="date" // Update the input type to "date"
 //             name="dob"
 //             value={formData.dob}
@@ -555,7 +555,7 @@ export default Page;
 //         <br />
 //         <label>
 //           Phone:
-//           <input
+//           <input required
 //             type="text"
 //             name="phone"
 //             value={formData.phone}
@@ -566,7 +566,7 @@ export default Page;
 //         <br />
 //         <label>
 //           Profile Picture:
-//           <input
+//           <input required
 //             accept='image/*'
 //             type="file"
 //             name="profilepic"
@@ -577,7 +577,7 @@ export default Page;
 //         <br />
 //         <label>
 //           Address:
-//           <input
+//           <input required
 //             type="text"
 //             name="address"
 //             value={formData.address}
@@ -588,7 +588,7 @@ export default Page;
 //         <br />
 //         <label>
 //           City:
-//           <input
+//           <input required
 //             type="text"
 //             name="city"
 //             value={formData.city}
@@ -599,7 +599,7 @@ export default Page;
 //         <br />
 //         <label>
 //           State:
-//           <input
+//           <input required
 //             type="text"
 //             name="state"
 //             value={formData.state}
@@ -610,7 +610,7 @@ export default Page;
 //         <br />
 //         <label>
 //           Pincode:
-//           <input
+//           <input required
 //             type="text"
 //             name="pincode"
 //             value={formData.pincode}
@@ -621,7 +621,7 @@ export default Page;
 //         <br />
 //         <label>
 //           Location:
-//           <input
+//           <input required
 //             type="text"
 //             name="location"
 //             value={formData.location}
@@ -632,7 +632,7 @@ export default Page;
 //         <br />
 //         <label>
 //           Class:
-//           <input
+//           <input required
 //             type="text"
 //             name="className"
 //             value={formData.className}
@@ -643,7 +643,7 @@ export default Page;
 //         <br />
 //         <label>
 //           School:
-//           <input
+//           <input required
 //             type="text"
 //             name="school"
 //             value={formData.school}
