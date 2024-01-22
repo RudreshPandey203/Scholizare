@@ -37,17 +37,17 @@ const Login = () => {
     return (
         <div
     className="flex flex-col text-center justify-center items-center w-full h-screen bg-cover"
-    style={{ backgroundImage: "url('/mainBG.png')" }}
+    style={{ backgroundImage: "url('/bg.png')" }}
     >
-      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url('/icon.png   ')" }}>
+      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url('   ')" }}>
       </div>
-      <div className="shadow-lg  h-content py-2 px-2 bg-white bg-opacity-10 rounded-3xl border border-black border-opacity-0 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-4xl font-jacques">
-        <h1 className="font-bold my-4 text-6xl text-[#9A62D7]">Login</h1>
+      <div className="flex flex-col items-center justify-center gap-4 text-4xl font-jacques h-content  py-2 px-2 backdrop-blur-sm bg-white bg-opacity-10 rounded-3xl shadow border-4 border-black border-opacity-0">
+        <h1 className="font-bold my-4 text-6xl text-primary">Login</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4 py-3 items-center">
           <input
             type="text"
             placeholder="Username"
-            className=" border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black"
+            className="border-2 rounded-md shadow-xl outline-p-2none placeholder:text-2xl placeholder:text-black p-1"
             onChange={(e)=>{setEmail(e.target.value)}}
           />
           <input
@@ -58,14 +58,14 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="p-2 bg-bg text-3xl rounded-xl w-72 text-white font-bold cursor-pointer px-6 py-2"
+            className="p-2 bg-primary shadow-xl text-3xl rounded-3xl w-72 text-white font-bold cursor-pointer px-6 py-2"
           >
             Login
           </button>
           {error && (        <div className="flex flex-col gap-3 px-4 py-3">{error}</div>
 )}
         <Link href={"/student/signup"} className="text-base w-72">
-            Dont have an account? <span className="text-bg">Register here</span>.
+            Dont have an account? <span className="text-primary">Register here</span>.
             </Link>
             </form>
 

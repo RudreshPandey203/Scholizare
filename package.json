@@ -18,7 +18,8 @@
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
     "react-multi-carousel": "^2.8.4",
-    "react-slick": "^0.29.0"
+    "react-slick": "^0.29.0",
+    "react-type-animation": "^3.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
