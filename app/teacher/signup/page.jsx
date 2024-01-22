@@ -30,7 +30,6 @@ const Signup = () => {
       sessionStorage.setItem('user', true);
       console.log({ res });
       await setDoc(doc(db, "teachers", res.user.uid), {
-        _id: res.user.uid,
         name,
         email,
         role: "teacher",
@@ -38,8 +37,7 @@ const Signup = () => {
         city: "",
         state: "",
         pincode: "",
-        latitude: null,
-        longitude: null,
+        location: "",
         className: "",
         school: "",
         profilepic: "",
@@ -57,11 +55,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col text-center justify-center items-center w-full h-screen bg-cover" style={{ backgroundImage: "url('/classroom.jpeg')" }}>
-      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url('/icon.png   ')" }}>
+    <div className="flex flex-col text-center justify-center items-center w-full h-screen bg-cover" style={{ backgroundImage: "url('/classroom.png')" }}>
+      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url(' ')" }}>
       </div>
     <div className="shadow-lg  h-content py-2 px-2 bg-white bg-opacity-10 rounded-3xl border border-black border-opacity-0 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-4xl font-jacques">
-      <h1 className="font-bold my-4 text-6xl text-[#9A62D7]">Register</h1>
+      <h1 className="font-bold my-4 text-6xl text-primary">Register</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4 pt-2 items-center">
             <input
                 type="text"
@@ -83,14 +81,14 @@ const Signup = () => {
           />
           <button
             type="submit"
-            className="p-2 bg-bg text-3xl rounded-xl w-72 text-white font-bold cursor-pointer px-6 py-2"
+            className="p-2 bg-primary text-3xl rounded-3xl w-72 text-white font-bold cursor-pointer px-6 py-2 hover:bg-blue-600"
           >
             Register
           </button>
         </form>
 {       error && ( <div className="flex flex-col gap-3 px-4 py-3">{error}</div>)
 }        <Link href="/teacher/signin" className='text-base  w-72'>
-            Already have an account? <span className='text-bg'>Login</span>
+            Already have an account? <span className='text-primary'>Login</span>
             </Link>
       </div>
     </div>
