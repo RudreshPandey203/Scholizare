@@ -97,8 +97,8 @@ function Page({ params }) {
 			{/*Sidebar*/}
 			<div className="flex flex-col items-center justify-normal gap-40 bg-secondary w-80 h-full pt-6 rounded-3xl">
 				<img className=" w-48 h-16" src="/icon.png"></img>
-				<div className="flex flex-col justify-between h-72	">
-					<div className="flex w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-normal font-jacques bg-primary active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary">
+				<div className="flex flex-col justify-between h-72">
+					<div className="flex w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques bg-primary active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary">
 						<p>Dashboard</p>
 						<div className="p-2">
 							<svg
@@ -116,7 +116,7 @@ function Page({ params }) {
 							</svg>
 						</div>
 					</div>
-					<div className="active:bg-primary hover:bg-primary rounded-md px-1 py-2 border-2 border-secondary flex w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-normal font-jacques  ">
+					<div className="flex active:bg-primary hover:bg-primary font-medium rounded-md px-1 py-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl  font-jacques">
 						<p>Video Summary</p>
 						<div className="p-2">
 							<svg
@@ -134,7 +134,7 @@ function Page({ params }) {
 						</div>
 					</div>
 					<Link
-						className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-normal font-jacques  "
+						className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques  "
 						href={`/student/${params.studentid}/search`}
 					>
 						<p>Search Tuitions</p>
@@ -156,7 +156,7 @@ function Page({ params }) {
 							</svg>
 						</div>
 					</Link>
-					<div className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-normal font-jacques  ">
+					<div className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques  ">
 						<p>Solve Doubts</p>
 						<div className="p-2">
 							<svg
@@ -173,7 +173,7 @@ function Page({ params }) {
 							</svg>
 						</div>
 					</div>
-					<div className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-normal font-jacques  ">
+					<div className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques  ">
 						<p>Wellness</p>
 						<div className="p-2">
 							<svg
@@ -911,7 +911,7 @@ function Page({ params }) {
 									}}
 									key={index}
 								>
-									<div className="flex flex-col justify-center gap-1 items-center hover:scale-105 transition duration-300 ease-in-out text-black text-2xl font-normal font-jacques rounded-2xl bg-white w-44 h-content shadow border border-black border-opacity-50">
+									<div className="flex flex-col justify-center gap-1 items-center hover:scale-105 transition duration-300 ease-in-out text-black text-2xl font-normal font-jacques rounded-2xl bg-secondary w-44 h-content shadow border-opacity-20 border-primary border-2">
 										<Image
 											src={item.imageAddress}
 											alt={item.name}
