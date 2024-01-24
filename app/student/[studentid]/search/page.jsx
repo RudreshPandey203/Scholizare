@@ -1,16 +1,33 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../../../firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  GoogleMap,
+  Marker,
+  InfoWindow,
+  LoadScript,
+  Autocomplete,
+} from "@react-google-maps/api";
+import { set } from "firebase/database";
+
+const mapContainerStyle = {
+  width: "40vw",
+  height: "400px",
+};
+
+const libraries = ["places"]; // Add the "places" library
 
 function Page({ params }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchDistance, setSearchDistance] = useState(null);
+  const [searchDistance, setSearchDistance] = useState(40); // Set default distance to 40 km
   const [teachers, setTeachers] = useState([]);
   const [user] = useAuthState(auth);
   const [filteredTeachers, setFilteredTeachers] = useState([]);
+  const [center, setCenter] = useState({ lat: 80, lng: 13 });
+  const [infoWindowPosition, setInfoWindowPosition] = useState(null);
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -52,6 +69,7 @@ function Page({ params }) {
     return distance;
   };
 
+
   useEffect(() => {
     const updateFilteredTeachers = async () => {
       const filteredTeachersPromises = teachers.map(async (teacher) => {
@@ -59,6 +77,8 @@ function Page({ params }) {
         const studentDoc = await getDoc(studentData);
         const studentLatitude = studentDoc.data().latitude;
         const studentLongitude = studentDoc.data().longitude;
+
+        setCenter({ lat: studentLatitude, lng: studentLongitude });
 
         const distance = calculateDistance(
           studentLatitude,
@@ -68,9 +88,15 @@ function Page({ params }) {
         );
 
         if (
-          (teacher.teacherName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            teacher.studentConstraints.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            teacher.courseName.toLowerCase().includes(searchTerm.toLowerCase())) &&
+          (teacher.teacherName
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+            teacher.studentConstraints
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            teacher.courseName
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())) &&
           (distance <= searchDistance || !searchDistance)
         ) {
           return teacher;
@@ -80,12 +106,19 @@ function Page({ params }) {
       });
 
       const filteredTeachersArray = await Promise.all(filteredTeachersPromises);
-      const finalFilteredTeachers = filteredTeachersArray.filter((teacher) => teacher !== null);
+      const finalFilteredTeachers = filteredTeachersArray.filter(
+        (teacher) => teacher !== null
+      );
       setFilteredTeachers(finalFilteredTeachers);
     };
 
     updateFilteredTeachers();
   }, [teachers, user, searchTerm, searchDistance]);
+
+  const handleMarkerClick = (position) => {
+    // Set the position for the InfoWindow
+    setInfoWindowPosition(position);
+  };
 
   return (
     <div>
@@ -101,38 +134,90 @@ function Page({ params }) {
         <input
           type="range"
           min="0"
-          max="100" // Set your maximum distance in kilometers as needed
+          max="100"
           value={searchDistance}
           onChange={handleDistanceSearch}
         />
       </div>
 
-      <div>
-        {filteredTeachers &&
-          filteredTeachers.map((teacher, index) => (
-            <Link
-              href={{
-                pathname: `/studentLogin/${params.student}/teacherProfile/${teacher._id}`,
-                query: {
-                  teachers: teacher._id,
-                },
-              }}
-              key={index}
+      <div className="flex flex-row">
+        <div>
+          {filteredTeachers &&
+            filteredTeachers.map((teacher, index) => (
+              <Link
+                href={{
+                  pathname: `/studentLogin/${params.student}/teacherProfile/${teacher._id}`,
+                  query: {
+                    teachers: teacher._id,
+                  },
+                }}
+                key={index}
+              >
+                <div className="p-10 m-10 outline">
+                  <h3>{teacher.teacherName}</h3>
+                  <p>{teacher.courseName}</p>
+                  <p>{teacher.address}</p>
+                </div>
+              </Link>
+            ))}
+        </div>
+        <div>
+          <LoadScript
+            googleMapsApiKey={
+              process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY
+            }
+            libraries={libraries}
+          >
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={center}
+              zoom={15}
+              className="md:w-96 md:h-96 w-full"
             >
-              <div className="p-10 m-10 outline">
-                <h3>{teacher.teacherName}</h3>
-                <p>{teacher.courseName}</p>
-                <p>{teacher.address}</p>
-              </div>
-            </Link>
-          ))}
+              {filteredTeachers.map((teacher, index) => (
+                <Marker
+                  key={index}
+                  position={{ lat: teacher.latitude, lng: teacher.longitude }}
+                  icon={{
+                    path: window.google.maps.SymbolPath.CIRCLE,
+                    scale: 8,
+                    fillColor: "red", // Set the marker color to red
+                    fillOpacity: 1,
+                    strokeColor: "white",
+                    strokeWeight: 1,
+                  }}
+                  onClick={() =>
+                    handleMarkerClick({
+                      lat: teacher.latitude,
+                      lng: teacher.longitude,
+                    })
+                  }
+                />
+              ))}
+
+              {/* Display InfoWindow if the position is set */}
+              {infoWindowPosition && (
+                <InfoWindow position={infoWindowPosition}>
+                  <div>
+                    <h3>
+                      {filteredTeachers[infoWindowPosition.index].teacherName}
+                    </h3>
+                    <p>
+                      {filteredTeachers[infoWindowPosition.index].courseName}
+                    </p>
+                    <p>{filteredTeachers[infoWindowPosition.index].address}</p>
+                  </div>
+                </InfoWindow>
+              )}
+            </GoogleMap>
+          </LoadScript>
+        </div>
       </div>
     </div>
   );
 }
 
 export default Page;
-
 // 'use client'
 // import React, { useEffect, useState } from "react";
 // import Link from "next/link";
@@ -172,27 +257,26 @@ export default Page;
 //     setSearchDistance(parseInt(event.target.value, 10)); // Parse to an integer
 //   };
 
-  // const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  //   const R = 6371; // Radius of the Earth in kilometers
-  //   const dLat = (lat2 - lat1) * (Math.PI / 180);
-  //   const dLon = (lon2 - lon1) * (Math.PI / 180);
-  //   const a =
-  //     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-  //     Math.cos(lat1 * (Math.PI / 180)) *
-  //       Math.cos(lat2 * (Math.PI / 180)) *
-  //       Math.sin(dLon / 2) *
-  //       Math.sin(dLon / 2);
-  //   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  //   const distance = R * c; // Distance in kilometers
-  //   return distance;
-  // };
+// const calculateDistance = (lat1, lon1, lat2, lon2) => {
+//   const R = 6371; // Radius of the Earth in kilometers
+//   const dLat = (lat2 - lat1) * (Math.PI / 180);
+//   const dLon = (lon2 - lon1) * (Math.PI / 180);
+//   const a =
+//     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+//     Math.cos(lat1 * (Math.PI / 180)) *
+//       Math.cos(lat2 * (Math.PI / 180)) *
+//       Math.sin(dLon / 2) *
+//       Math.sin(dLon / 2);
+//   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//   const distance = R * c; // Distance in kilometers
+//   return distance;
+// };
 // useEffect(() => {
 //   const filteredTeachers1 = teachers.filter(async (teacher) => {
 
 //     // Get the student's latitude and longitude from the address
 //     const studentData = doc(collection(db, "students"), user.uid);
 //     const studentDoc = await getDoc(studentData);;
-
 
 //     const studentLatitude = studentDoc.data().latitude; /* Add logic to get student's latitude from the address */
 //     const studentLongitude = studentDoc.data().longitude ; /* Add logic to get student's longitude from the address */
@@ -358,7 +442,6 @@ export default Page;
 
 // // export default Page;
 
-
 // // // "use client";
 // // // import React, { useEffect, useState } from "react";
 // // // import Link from "next/link";
@@ -388,10 +471,8 @@ export default Page;
 // // //       }
 // // //     }
 // // //     fetchTeachers();
-    
+
 // // //   }, []);
-
-
 
 // // //   const handleSearch = (event) => {
 // // //     setSearchTerm(event.target.value);

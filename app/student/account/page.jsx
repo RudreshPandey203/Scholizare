@@ -20,8 +20,6 @@ const mapContainerStyle = {
   height: "400px",
 };
 
-function handleClick() {}
-
 const libraries = ["places"]; // Add the "places" library
 
 const Page = () => {

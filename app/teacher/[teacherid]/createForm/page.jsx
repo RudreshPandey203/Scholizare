@@ -21,8 +21,8 @@ const RegisterCourseForm = () => {
   const [formData, setFormData] = useState({
     courseName: "",
     studentConstraints: "",
-    latitude: null,
-    longitude: null,
+    latitude: 0,
+    longitude: 0,
     fees: "",
     city: "",
     state: "",
