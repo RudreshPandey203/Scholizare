@@ -17,6 +17,7 @@ function Page({ params }) {
 	const router = useRouter();
 	useEffect(() => {
 		const fetechUserData = async () => {
+
 			if (user) {
 				const userRef = doc(db, 'students', user.uid);
 				const userDoc = await getDoc(userRef);
@@ -888,7 +889,7 @@ function Page({ params }) {
 					<div className=" py-6 pl-6 font-['Merriweather'] font-[450] text-3xl">Registered Courses:</div>
 					<div className='w-[80vw]'>
 						<Carousel
-							className="px-10 h-content"
+							className="px-10 h-content py-2"
 							swipeable={true}
 							draggable={true}
 							responsive={responsive}
