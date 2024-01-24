@@ -41,7 +41,7 @@ const Signup = () => {
         longitude: null,
         className: "",
         school: "",
-        profilepic: "",
+        profilepic: "/user.png",
         dob: "",
         phone: "",
         courses: [],
