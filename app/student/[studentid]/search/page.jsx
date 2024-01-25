@@ -14,8 +14,8 @@ import {
 import { set } from "firebase/database";
 
 const mapContainerStyle = {
-  width: "40vw",
-  height: "400px",
+  width: "50vw",
+  height: "85vh",
 };
 
 const libraries = ["places"]; // Add the "places" library
@@ -28,6 +28,7 @@ function Page({ params }) {
   const [filteredTeachers, setFilteredTeachers] = useState([]);
   const [center, setCenter] = useState({ lat: 80, lng: 13 });
   const [infoWindowPosition, setInfoWindowPosition] = useState(null);
+  const [zoom, setZoom] = useState(14);
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -78,7 +79,11 @@ function Page({ params }) {
         const studentLatitude = studentDoc.data().latitude;
         const studentLongitude = studentDoc.data().longitude;
 
+        console.log("student: ",studentDoc.data());
+
         setCenter({ lat: studentLatitude, lng: studentLongitude });
+
+        let dmax = 0;
 
         const distance = calculateDistance(
           studentLatitude,
@@ -86,6 +91,14 @@ function Page({ params }) {
           teacher.latitude,
           teacher.longitude
         );
+          if(distance > dmax){
+            dmax = distance;
+          }
+          let degree = dmax/111;
+          console.log("degree: ",degree);
+          let zoom1 = Math.log2(360 / degree);
+          console.log("zoom1: ",zoom1);
+          setZoom(zoom1);
 
         if (
           (teacher.teacherName
@@ -99,6 +112,7 @@ function Page({ params }) {
               .includes(searchTerm.toLowerCase())) &&
           (distance <= searchDistance || !searchDistance)
         ) {
+          console.log("teacher: ",teacher);
           return teacher;
         }
 
@@ -133,7 +147,7 @@ function Page({ params }) {
         <label>Distance Constraint: {searchDistance} kilometers</label>
         <input
           type="range"
-          min="0"
+          min="1"
           max="100"
           value={searchDistance}
           onChange={handleDistanceSearch}
@@ -171,7 +185,7 @@ function Page({ params }) {
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={center}
-              zoom={15}
+              zoom={zoom}
               className="md:w-96 md:h-96 w-full"
             >
               {filteredTeachers.map((teacher, index) => (
