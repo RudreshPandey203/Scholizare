@@ -11,7 +11,6 @@ import {
   LoadScript,
   Autocomplete,
 } from "@react-google-maps/api";
-import { set } from "firebase/database";
 
 const mapContainerStyle = {
   width: "50vw",
@@ -70,6 +69,12 @@ function Page({ params }) {
     return distance;
   };
 
+  const calculateZoom = (dmax) => {
+    let degree = dmax/111/1.3;
+    console.log("degree: ",degree);
+    let zoom1 = Math.log2(360 / degree);
+    return zoom1;
+  }
 
   useEffect(() => {
     const updateFilteredTeachers = async () => {
@@ -144,13 +149,18 @@ function Page({ params }) {
       />
 
       <div>
-        <label>Distance Constraint: {searchDistance} kilometers</label>
+        <label>Distance Constraint:</label>
         <input
           type="range"
           min="1"
           max="100"
           value={searchDistance}
           onChange={handleDistanceSearch}
+        />
+        <input 
+        type="number"
+        value={searchDistance}
+        onChange={handleDistanceSearch}
         />
       </div>
 
@@ -160,7 +170,7 @@ function Page({ params }) {
             filteredTeachers.map((teacher, index) => (
               <Link
                 href={{
-                  pathname: `/studentLogin/${params.student}/teacherProfile/${teacher._id}`,
+                  pathname: `/student/${params.studentid}/teacherProfile/${teacher._id}`,
                   query: {
                     teachers: teacher._id,
                   },
@@ -185,7 +195,7 @@ function Page({ params }) {
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={center}
-              zoom={zoom}
+              zoom={calculateZoom(searchDistance)}
               className="md:w-96 md:h-96 w-full"
             >
               {filteredTeachers.map((teacher, index) => (
