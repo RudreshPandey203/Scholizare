@@ -904,7 +904,7 @@ function Page({ params }) {
 							{carouselData.map((item, index) => (
 								<Link
 									href={{
-										pathname: '/student/class/',
+										pathname: '/student/studentid/class/messages',
 										query: {
 											teacherid: item.userid,
 											teachername: item.name,

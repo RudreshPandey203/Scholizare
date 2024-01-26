@@ -40,7 +40,7 @@ const Signup = () => {
         location: "",
         className: "",
         school: "",
-        profilepic: "",
+        profilepic: "/user.png",
         dob: "",
         phone: "",
         courses: [],
