@@ -1,9 +1,11 @@
 // pages/login.js
 "use client"
 import React, { useState } from "react";
-import { auth } from "../../firebase/config"; // Replace with the actual path to your AuthContext
+import { auth,db } from "../../firebase/config"; // Replace with the actual path to your AuthContext
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { doc, getDoc } from "firebase/firestore";
 import Link from "next/link";
 
 const Login = () => {
@@ -15,22 +17,27 @@ const Login = () => {
     const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const res = await signInWithEmailAndPassword(
-                email,
-                password
-            );
-            console.log({ res });
-            sessionStorage.setItem('user',true);
-            setEmail("");
-            setPassword("");
-            router.replace(`/teacher/${res.user.uid}`);
-
-        } catch (error) {
-            setError(error.message);
+      e.preventDefault();
+  
+      try {
+        const res = await signInWithEmailAndPassword(email, password);
+        console.log(res.user.uid);
+        const docRef = doc(db, "teachers", res.user.uid);
+        console.log(docRef)
+        const docSnap = await getDoc(docRef);
+        console.log(docSnap)
+  
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          // User is a student, proceed with login
+          router.replace(`/teacher/${res.user.uid}`);
+        } else {
+          // User not found in the students table, display an error
+          setError("Invalid login credentials.");
         }
+      } catch (error) {
+        setError(error.message);
+      }
     };
 
     return (
@@ -58,7 +65,7 @@ const Login = () => {
                 >
                   Login
                 </button>
-                {error && (        <div className="flex flex-col gap-3 px-4 py-3">{error}</div>
+                {error && (        <div className="text-red-500 flex flex-col gap-3 px-4 py-3">Bad Auth</div>
       )}
               <Link href={"/teacher/signup"} className="text-base w-72" >
                   Dont have an account? <span className="text-primary">Register here</span>.

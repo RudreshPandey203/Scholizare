@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { auth } from '@/app/firebase/config';
-import { getDoc, doc, collection } from 'firebase/firestore';
+import { getDoc, doc, collection, Timestamp } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/navigation';
@@ -13,6 +13,22 @@ function page({params}) {
 	const [user] = useAuthState(auth);
 	const userSession = sessionStorage.getItem('user');
 	const [docSnap, setDocSnap] = useState(null);
+
+	const currentDate = new Date();
+
+const options = {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true,
+};
+
+const formattedDate = currentDate.toLocaleString('en-US', options);
+
+console.log(formattedDate);
 
 	useEffect(()=>{
 		const fetchUserData = async () =>{

@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Scholizare',
   description: 'Your next door learning destination',
-  image: '/logo.png',
 }
+
 
 export default function RootLayout({ children }) {
   return (

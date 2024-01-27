@@ -30,6 +30,7 @@ const Signup = () => {
       sessionStorage.setItem('user', true);
       console.log({ res });
       await setDoc(doc(db, "teachers", res.user.uid), {
+        _id: res.user.uid,
         name,
         email,
         role: "teacher",

@@ -5,6 +5,7 @@ import { db } from '../../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth } from '../../../firebase/config';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Link from 'next/link';
 
 
 const Page = () => {
@@ -46,7 +47,7 @@ const Page = () => {
                                 console.error('Error getting document:', error.message);
                         }
                 } else {
-                        router.replace('/teacher/signin');
+                        // router.replace('/teacher/signin');
                 }
         };
 
@@ -56,13 +57,15 @@ const Page = () => {
     return (
         <div>
             Course Page
+            <br/>
             {hostedCourses.map((course) => (
-                <div className="m-5 p-5 bg-slate-500" key={course.courseName}>
+                <Link className="block m-5 p-5 bg-slate-400" key={course.courseName}
+                href={`class/${course._id}`}>
                     <h3>{course.courseName}</h3>
                     <p>{course.studentConstraints}</p>
                     <p>{course.location}</p>
                     <p>{course.fees}</p>
-                </div>
+                </Link>
             ))}
         </div>
     );
