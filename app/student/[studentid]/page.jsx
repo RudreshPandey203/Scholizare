@@ -902,6 +902,58 @@ function Page({ params }) {
 						</div>
 						<div className="w-80 h-36 bg-purple-300 rounded-tl-[3rem] rounded-bl-[3rem] rounded-br-[3rem]"></div>
 					</div> */}
+
+				</div>
+				{/*enrolled carousel */}
+				<div className="flex flex-col  items-start ">
+					<div className=" py-6 pl-6 font-['Merriweather'] font-[450] text-3xl">Registered Courses:</div>
+					<div className='w-[80vw]'>
+						<Carousel
+							className="px-10 h-content py-2"
+							swipeable={true}
+							draggable={true}
+							responsive={responsive}
+							infinite={false}
+							autoPlaySpeed={100}
+							keyBoardControl={true}
+							containerClass="carousel-container"
+							removeArrowOnDeviceType={['tablet', 'mobile']}
+							dotListClass="custom-dot-list-style"
+							itemClass="carousel-item-padding-40-px"
+						>
+							{carouselData.map((item, index) => (
+								<Link
+									href={{
+										pathname: '/student/studentid/class/messages',
+										query: {
+											teacherid: item.userid,
+											teachername: item.name,
+										},
+									}}
+									key={index}
+								>
+									<div className="flex flex-col justify-center gap-1 items-center hover:scale-105 transition duration-300 ease-in-out text-black text-2xl font-normal font-jacques rounded-2xl bg-secondary w-44 h-content shadow border-opacity-20 border-primary border-2">
+										<Image
+											src={item.imageAddress}
+											alt={item.name}
+											className="w-44 h-40 rounded-tl-2xl rounded-tr-2xl"
+											width={200}
+											height={200}
+										/>
+										<p className="">{item.name}</p>
+										<p className="text-black text-lg font-normal font-jacques">
+											{item.description}
+										</p>
+									</div>
+								</Link>
+							))}
+						</Carousel>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+
         </div>
         {/*enrolled carousel */}
         <div className="flex flex-col  items-start ">
@@ -957,6 +1009,7 @@ function Page({ params }) {
       </div>
     </div>
   );
+
 }
 
 export default Page;
