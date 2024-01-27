@@ -7,6 +7,7 @@ import { signOut } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase/config";
+
 import {
   GoogleMap,
   Marker,
@@ -26,7 +27,8 @@ const libraries = ["places"]; // Add the "places" library
 const Page = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
-  const userSession = sessionStorage.getItem("user");
+  // const userSession = sessionStorage.getItem("user");
+  const userSession = typeof window !== 'undefined' ? sessionStorage.getItem("user") : null;
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -45,6 +47,9 @@ const Page = () => {
     className: "",
     school: "",
   });
+
+  console.log("usersession", userSession)
+
 
   const getAddressComponent = (addressComponents, type) => {
     const addressComponent = addressComponents.find((component) =>
@@ -88,7 +93,7 @@ const Page = () => {
   };
 
   const handlePlaceSelect = (place) => {
-    if (place.geometry) {
+    if (place.geometry && place.geometry.location) {
       setFormData({
         ...formData,
         latitude: place.geometry.location.lat(),
@@ -98,10 +103,16 @@ const Page = () => {
         // state: getAddressComponent(place.address_components, 'administrative_area_level_1'),
         // pincode: getAddressComponent(place.address_components, 'postal_code'),
       });
-      setCenter({
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      });
+      // if (!isNaN(place.geometry.location.lat()) && !isNaN(place.geometry.location.lng())) 
+        setCenter({
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+        });
+      
+      // setCenter({
+      //   lat: place.geometry.location.lat(),
+      //   lng: place.geometry.location.lng(),
+      // });
     }
   };
 
@@ -196,7 +207,6 @@ const Page = () => {
       console.error("Error updating data:", error);
     }
   };
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (user && userSession) {
@@ -281,8 +291,8 @@ const Page = () => {
                 {selectedLocation && <Marker position={selectedLocation} />}
                 <Autocomplete
                   onLoad={(autoComplete) => setAutoComplete(autoComplete)}
-                  onPlaceChanged={() =>
-                    handlePlaceSelect(autoComplete.getPlace())
+                  onPlaceChanged={() => autoComplete && handlePlaceSelect(autoComplete.getPlace())
+
                   }
                 >
                   <input

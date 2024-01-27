@@ -30,6 +30,7 @@ const Login = () => {
         if (docSnap.exists()) {
           console.log("Document data:", docSnap.data());
           // User is a student, proceed with login
+          sessionStorage.setItem("user", JSON.stringify(res.user)); // Add user to session storage
           router.replace(`/teacher/${res.user.uid}`);
         } else {
           // User not found in the students table, display an error

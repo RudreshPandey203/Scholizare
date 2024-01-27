@@ -903,8 +903,8 @@ function Page({ params }) {
 						<div className="w-80 h-36 bg-purple-300 rounded-tl-[3rem] rounded-bl-[3rem] rounded-br-[3rem]"></div>
 					</div> */}
 
-				</div>
-				{/*enrolled carousel */}
+				{/* </div>
+				{/*enrolled carousel
 				<div className="flex flex-col  items-start ">
 					<div className=" py-6 pl-6 font-['Merriweather'] font-[450] text-3xl">Registered Courses:</div>
 					<div className='w-[80vw]'>
@@ -952,7 +952,7 @@ function Page({ params }) {
 				</div>
 			</div>
 		</div>
-	);
+	); */}
 
         </div>
         {/*enrolled carousel */}

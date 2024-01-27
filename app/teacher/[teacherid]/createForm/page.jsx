@@ -53,7 +53,35 @@ const RegisterCourseForm = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         try {
-          const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY}`;
+          try {
+            const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY}`;
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            if (data.status === "OK" && data.results.length > 0) {
+              const result = data.results[0];
+              setFormData({
+                ...formData,
+                address: result.formatted_address,
+                city: getAddressComponent(result.address_components, "locality"),
+                state: getAddressComponent(
+                  result.address_components,
+                  "administrative_area_level_1"
+                ),
+                pincode: getAddressComponent(
+                  result.address_components,
+                  "postal_code"
+                ),
+                country: getAddressComponent(
+                  result.address_components,
+                  "country"
+                ),
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              });
+            }
+          } catch (error) {
+            console.error("Error fetching location details:", error);
+          }
           const response = await fetch(apiUrl);
           const data = await response.json();
           if (data.status === "OK" && data.results.length > 0) {
