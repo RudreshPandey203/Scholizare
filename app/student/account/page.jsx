@@ -276,6 +276,7 @@ const Page = () => {
                 className="md:w-96 md:h-96 w-full"
               >
                 {selectedLocation && <Marker position={selectedLocation} />}
+                <Marker position={center}/>
                 <Autocomplete
                   onLoad={(autoComplete) => setAutoComplete(autoComplete)}
                   onPlaceChanged={() =>
