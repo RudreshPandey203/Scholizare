@@ -209,6 +209,21 @@ const Page = ({ params }) => {
           </div>
         </div>
       )}
+      
+      <button
+  onClick={() => window.open("https://meet.google.com/", "_blank")}
+  className="p-5 m-3 bg-red-200"
+>
+  Generate Google Meet link
+</button>
+
+      {/* <button
+        target="iframe_a"
+        onClick={() => window.open("https://meet.google.com/")}
+        className="p-5 m-3 bg-red-200"
+      >
+        Generate google meet link
+      </button> */}
     </div>
   );
 };
