@@ -15,6 +15,7 @@ module.exports = {
       fontFamily: {
         jacques: "Jacques Francois, serif",
         lalezar: "Lalezar, system-ui",
+        merriweather: "Merriweather, serif",
       },
       dropShadow: {
         '3xl': '4px 3px 10px #E8E8E8',

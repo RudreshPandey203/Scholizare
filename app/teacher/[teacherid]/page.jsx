@@ -65,7 +65,7 @@ console.log(formattedDate);
 			</div>
 			<div className="flex justify-between mt-2 px-16">
 				<div className='pt-16'>
-					<div className="w-96 h-16 text-black text-5xl font-bold font-merriweather">
+					<div className="w-fit h-16 text-black text-5xl font-bold font-merriweather">
 						Hello {docSnap?.name},
 					</div>
 					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois']">
