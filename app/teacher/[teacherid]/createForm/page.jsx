@@ -268,16 +268,10 @@ const RegisterCourseForm = () => {
         fees: formData.fees,
         profilePic: teachers.profilepic,
         students: [],
+        pendingStudents: [],
         messages: [{message:mess, sender:"admin", timestamp:formattedDate}],
       });
       
-
-
-      // await setDoc(doc(db, "messages", courseid), {
-      //   messages: [mess],
-      //   sender: "admin",
-      //   timestamp: formattedDate,
-      // });
       console.log("works");
       setFormData({
         courseName: "",

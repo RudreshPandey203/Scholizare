@@ -18,7 +18,27 @@ const Page = ({ params }) => {
 
   // Get the router object
   const router = useRouter();
+  // const [showNotification, setShowNotification] = useState(false);
+  // const [pendingRequests, setPendingRequests] = useState([]);
 
+  // const courseId = params.courseid;
+
+  // handleAccept = (studentId) => async () => {
+  //   const docRef = doc(db, "students", studentId);
+  //   const docSnap = await getDoc(docRef);
+  //   if (docSnap.exists()) {
+  //     const studentData = docSnap.data();
+  //     const studentCourses = studentData.courses;
+  //     studentCourses.push(courseId);
+  //     await updateDoc(docRef, {
+  //       courses: studentCourses,
+  //     });
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  //   const courseDocRef = doc(db, "courses", courseId);
+    
+  // }
   // Fetch course data and enrolled students on component mount
   useEffect(() => {
     const fetchCourseData = async () => {
