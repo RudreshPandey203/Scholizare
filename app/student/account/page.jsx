@@ -359,10 +359,9 @@ const Page = () => {
               value={formData.phone}
               onChange={handleChange}
               autoComplete="phone"
-              className="w-28 md:w-52 block px-2 py-1 border rounded-md focus:outline-none focus:border-blue-300"
+              className="w-28 md:w-52 block px-2 py-1 border rounded-md focus:outline-none focus:border-blue-300 peer"
             />
           </div>
-
           <div className="flex justify-evenly items-center w-40 md:w-96">
             Photo:
             <input

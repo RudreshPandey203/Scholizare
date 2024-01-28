@@ -1,10 +1,12 @@
 // components/RegisterCourseformData.js
 "use client";
 import React, { useState, useEffect } from "react";
+import { Link } from 'next/link'; // or 'react-router-dom'
 import { auth } from "@/app/firebase/config";
 import { db } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { ImCross } from "react-icons/im";
 import {
   GoogleMap,
   LoadScript,
@@ -13,10 +15,12 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useAuthState } from "react-firebase-hooks/auth";
+// const [user] = useAuthState(auth);
+//   const userSession = typeof window !== "undefined" ? sessionStorage.getItem("user") : null;
 
 const mapContainerStyle = {
   width: "40vw",
-  height: "400px",
+  height: "70vh",
 };
 
 const libraries = ["places"]; // Add the "places" library
@@ -296,16 +300,27 @@ const RegisterCourseForm = () => {
   };
 
   return (
-    <div className="w-[80vw] mx-auto mt-10 p-6 m-[5vh] bg-blue-500 rounded-md h-[90vh]">
-      <h2 className="text-2xl text-white font-semibold mb-6">
-        Register for a Course
-      </h2>
-      <div className="flex justify-center flex-row">
-        <form name="fillform" onSubmit={handleSubmit}>
-          <div className="mb-4">
+    <div className="px-4 py-2 flex flex-col md:gap-4">
+      <div className="flex items-center justify-between px-3">
+        <div className="text-3xl text-black font-['Merriweather'] font-semibold  ">
+        Add a New Course:
+      </div>
+      {/* <Link href={`/teacher/${user.uid}`}></Link> */}
+      <div>
+      <ImCross />
+</div>
+
+
+      </div>
+    <div className="w-content h-fit mx-auto  bg-secondary rounded-md px-6 py-4">
+      
+      
+      <div className=" flex justify-between  gap-20 flex-wrap-reverse">
+        <form name="fillform" className="flex flex-col gap-2 " onSubmit={handleSubmit}>
+          <div className="">
             <label
               htmlFor="courseName"
-              className="block text-white text-sm font-medium mb-2"
+              className="block text-black text-sm font-medium mb-2"
             >
               Course Name
             </label>
@@ -315,15 +330,15 @@ const RegisterCourseForm = () => {
               name="courseName"
               value={formData.courseName}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-300"
+              className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
               placeholder="Enter the course name"
             />
           </div>
 
-          <div className="mb-4">
+          <div className="">
             <label
               htmlFor="studentConstraints"
-              className="block text-white text-sm font-medium mb-2"
+              className="block text-black text-sm font-medium mb-2"
             >
               Student Constraints
             </label>
@@ -333,69 +348,106 @@ const RegisterCourseForm = () => {
               name="studentConstraints"
               value={formData.studentConstraints}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-300"
+              className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
               placeholder="Enter student constraints"
             />
           </div>
+          <div>
+            <div className="">
+            <label
+              htmlFor="fees"
+              className="block text-black text-sm font-medium mb-2"
+            >
+              Fees
+            </label>
+            <input
+              type="text"
+              id="fees"
+              name="fees"
+              value={formData.fees}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
+              placeholder="Enter the fees"
+            />
+            </div>
+          </div>
 
-          <div className="mb-4">
-            <label>
+          <div className="">
+            <label className="block text-black text-sm font-medium mb-2">
               Address:
+              </label>
               <input
                 type="text"
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
                 autoComplete="address"
+                className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
+              placeholder="Enter student address"
               />
-            </label>
-            <br />
-            <label>
+              </div>
+            
+            <div>
+            <label className="block text-black text-sm font-medium mb-2">
               City:
+              </label>
               <input
                 type="text"
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
                 autoComplete="city"
+                className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
+              placeholder=""
               />
-            </label>
-            <br />
-            <label>
+              </div>
+            
+            <div>
+            <label className="block text-black text-sm font-medium mb-2">
               State:
+              </label>
               <input
                 type="text"
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
                 autoComplete="state"
+                className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
+              placeholder=""
               />
-            </label>
-            <br />
-            <label>
+              </div>
+            
+            <div>
+            <label className="block text-black text-sm font-medium mb-2">
               Pincode:
+              </label>
               <input
                 type="text"
                 name="pincode"
                 value={formData.pincode}
                 onChange={handleChange}
                 autoComplete="pincode"
+                className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
+              placeholder=""
               />
-            </label>
-            <br />
-            <label>
+              </div>
+            
+            <div>
+            <label className="block text-black text-sm font-medium mb-2">
               Country:
+              </label>
               <input
                 type="text"
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
                 autoComplete="country"
+                className="w-96 px-4 py-2 border rounded-md focus:outline-none focus:border-primary"
+              placeholder=""
               />
-            </label>
-            <br />
+              </div>
             <label>
-              Location:
+              {/* Location:
               <input
                 type="text"
                 name="latitude"
@@ -409,56 +461,28 @@ const RegisterCourseForm = () => {
                 value={formData.longitude}
                 onChange={handleChange}
                 autoComplete="longitude"
-              />
-              <button
-                className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none mt-4"
-                type="button"
-                onClick={handleGetLocation}
-              >
-                Get Present Location
-              </button>
-              {selectedLocation && (
-                <div>
-                  <p>Selected Location:</p>
-                  <p>Latitude: {selectedLocation.lat}</p>
-                  <p>Longitude: {selectedLocation.lng}</p>
-                  <button
-                    className="rounded-lg bg-blue-500 p-2"
-                    onClick={handleLocationSelect}
-                  >
-                    Use this Location
-                  </button>
-                </div>
-              )}
+              /> */}
+              
+              
             </label>
-            <br />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="fees"
-              className="block text-white text-sm font-medium mb-2"
-            >
-              Fees
-            </label>
-            <input
-              type="text"
-              id="fees"
-              name="fees"
-              value={formData.fees}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-300"
-              placeholder="Enter the fees"
-            />
-          </div>
-
+            <div className="flex justify-between">
+        
           <button
             type="submit"
-            className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-200 focus:outline-none"
+            className="bg-blue-500 w-36 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none "
           >
             Register
           </button>
+          <button
+                className="bg-blue-500 w-36 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none "
+                type="button"
+                onClick={handleGetLocation}
+              >
+                Present Location
+              </button>
+          </div>
         </form>
+        <div className="h-100vh flex justify-start items-center flex-col  xl:gap-9">
         <LoadScript
           googleMapsApiKey={
             process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY
@@ -500,7 +524,22 @@ const RegisterCourseForm = () => {
             </Autocomplete>
           </GoogleMap>
         </LoadScript>
+        {selectedLocation && (
+                <div>
+                  {/* <p>Selected Location:</p>
+                  <p>Latitude: {selectedLocation.lat}</p>
+                  <p>Longitude: {selectedLocation.lng}</p> */}
+                  <button
+                    className="bg-blue-500 w-36 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none "
+                    onClick={handleLocationSelect}
+                  >
+                    Use this Location
+                  </button>
+                </div>
+              )}
+        </div>
       </div>
+    </div>
     </div>
   );
 };
