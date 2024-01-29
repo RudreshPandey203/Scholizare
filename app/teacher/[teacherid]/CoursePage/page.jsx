@@ -182,7 +182,7 @@ const Page = () => {
       <h1 className="text-3xl font-bold mb-8">Your Courses</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {hostedCourses.map((course) => (
-          <Link key={course.courseName} href={`class/${course._id}`}>
+          <Link key={course.courseName} href={`/teacher/${user.uid}/class/${course._id}`}>
             <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg cursor-pointer w-96">
               <h2 className="text-xl font-semibold mb-4">{course.courseName}</h2>
               <p className="text-gray-600 mb-2">{course.studentConstraints}</p>
