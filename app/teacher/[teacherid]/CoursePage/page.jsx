@@ -144,7 +144,7 @@ const Page = () => {
 
     {/* Notifications */}
     {showNotification && (
-      <div className="fixed top-17 right-4 w-96 h-96 bg-primary/10 p-4 rounded-md shadow-md">
+      <div className="fixed top-17 right-4 w-96 h-96 bg-blue-300 p-4 rounded-md shadow-md">
         <h2 className="text-lg font-semibold mb-2 font-merriweather">Notifications:</h2>
         {pendingRequests.map((request, index) => (
           <div key={request.email} className="mb-4 p-2 bg-white w-full flex justify-between items-center border border-gray-400">
