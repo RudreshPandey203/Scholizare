@@ -45,19 +45,8 @@ console.log(formattedDate);
 	console.log("teacher data = ",docSnap);
 	
 	return (
-		<div className="h-[100vh] overflow-y-hidden">
-			<div className="flex justify-end pr-2 pt-4">
-			<svg width="36"
-					height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_247_2)">
-<path d="M14.9998 19C15 19.5046 14.8094 19.9906 14.4664 20.3605C14.1233 20.7305 13.653 20.9572 13.1498 20.995L12.9998 21H10.9998C10.4953 21.0002 10.0093 20.8096 9.6393 20.4665C9.26932 20.1234 9.04269 19.6532 9.00485 19.15L8.99985 19H14.9998ZM11.9998 2C13.8148 1.99997 15.5589 2.70489 16.8641 3.96607C18.1693 5.22726 18.9336 6.94609 18.9958 8.76L18.9998 9V12.764L20.8218 16.408C20.9014 16.567 20.9412 16.7429 20.9378 16.9206C20.9345 17.0984 20.8881 17.2727 20.8027 17.4286C20.7173 17.5845 20.5953 17.7174 20.4473 17.8158C20.2993 17.9143 20.1297 17.9754 19.9528 17.994L19.8378 18H4.16185C3.98401 18.0001 3.80882 17.957 3.65127 17.8745C3.49372 17.792 3.35853 17.6725 3.25727 17.5264C3.156 17.3802 3.0917 17.2116 3.06985 17.0351C3.04801 16.8586 3.06928 16.6795 3.13185 16.513L3.17785 16.408L4.99985 12.764V9C4.99985 7.14348 5.73735 5.36301 7.0501 4.05025C8.36286 2.7375 10.1433 2 11.9998 2Z" fill="black"/>
-</g>
-<defs>
-<clipPath id="clip0_247_2">
-<rect width="24" height="24" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+		<div className="h-[100vh] p-4 ">
+			<div className="flex justify-end pr-2 ">
                 <Link href='/teacher/account'>
 				<svg
 					width="36"
@@ -77,7 +66,7 @@ console.log(formattedDate);
                 </Link>
 				
 			</div>
-			<div className="flex justify-between mt-2 px-16">
+			<div className="flex justify-between gap-6 md:gap-0 mt-6 md:px-20 bg-secondary py-4 rounded-xl flex-wrap h-fit w-fit xl:w-full">
 				<div className='pt-16'>
 					<div className="w-fit h-16 text-black text-5xl font-bold font-merriweather">
 						Hello {docSnap?.name},
@@ -104,7 +93,27 @@ console.log(formattedDate);
 							/>
 						</svg>
 					</Link>
-                    <Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+                    
+                    </div>
+				</div>
+				<div>
+					<Image
+						src="/teacher.png"
+						alt="Teacher Image"
+						width={400}
+						height={300}
+					/>
+				</div>
+			</div>
+			{/*lower part*/}
+			<div className='flex gap-2 '>
+				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
+					<div className='text-5xl font-bold font-merriweather '>View Courses
+					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
+						Schoolz provides trained, passionate tutors to support the students
+						with recovery from unfinished learning,remediation and enrichment!
+					</div>
+					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/CoursePage/`}>
 						View Courses
 						<svg
@@ -121,18 +130,54 @@ console.log(formattedDate);
 							/>
 						</svg>
 					</Link>
-                    </div>
-				</div>
-				<div>
+					</div>
+					<div>
 					<Image
-						src="/teacher.png"
+						src="/group.png"
 						alt="Teacher Image"
-						width={400}
-						height={300}
+						width={500}
+						height={500}
+						className='w-full h-full'
 					/>
+					</div>
 				</div>
+				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
+					<div className='text-5xl font-bold font-merriweather '>Check Schedule
+					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
+						Schoolz provides trained, passionate tutors to support the students
+						with recovery from unfinished learning,remediation and enrichment!
+					</div>
+					<div class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+                    >
+						Check Calender
+						<svg
+							className="group-hover:rotate-90 ease-in-out duration-500"
+							width="11"
+							height="10"
+							viewBox="0 0 11 10"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M5.27654 0.21934C5.41869 0.0788896 5.61138 0 5.81228 0C6.01318 0 6.20587 0.0788896 6.34801 0.21934L10.644 4.46934C10.786 4.60997 10.8657 4.80059 10.8657 4.99934C10.8657 5.19809 10.786 5.38871 10.644 5.52934L6.34801 9.77934C6.20421 9.91175 6.01412 9.98385 5.8177 9.9805C5.62128 9.97714 5.43383 9.89858 5.29474 9.76134C5.15601 9.62374 5.0766 9.43829 5.07321 9.24397C5.06982 9.04965 5.1427 8.8616 5.27654 8.71934L8.27868 5.74934L0.758164 5.74934C0.557099 5.74934 0.36427 5.67032 0.222095 5.52967C0.0799208 5.38902 4.76837e-05 5.19825 4.76837e-05 4.99934C4.76837e-05 4.80043 0.0799208 4.60966 0.222095 4.46901C0.36427 4.32836 0.557099 4.24934 0.758164 4.24934L8.27868 4.24934L5.27654 1.27934C5.13457 1.13871 5.05483 0.948091 5.05483 0.74934C5.05483 0.550589 5.13457 0.359965 5.27654 0.21934Z"
+								fill="black"
+							/>
+						</svg>
+					</div>
+					</div>
+					<div>
+					<Image
+						src="/tab.png"
+						alt="Teacher Image"
+						width={500}
+						height={500}
+						className='w-full h-full'
+					/>
+					</div>
+				</div>
+				
 			</div>
-			{/*lower part*/}
+
 			{/* <div className='w-screen h-full bg-blue-200 flex py-10 mt-3 justify-evenly'>
 			<div class="w-72 h-80 bg-white rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300"><Image
 						src="/calen.png"
