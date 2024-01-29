@@ -1,18 +1,17 @@
-// node --version # Should be >= 18
-// npm install @google/generative-ai express
-const express = require('express');
-const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@google/generative-ai');
-const dotenv = require('dotenv').config()
+// pages/api/chatbot.js
 
-const app = express();
-const port = process.env.PORT || 4000;
-app.use(express.json());
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+
+const API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY; // Replace with your actual API key
 const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyDpIxLNdKf4FzENFjUbvbGJs09I6qtElLs";
 
-async function runChat(userInput) {
+async function runChat({userInput}) {
+  console.log(userInput)
+
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+
+  console.log(userInput)
 
   const generationConfig = {
     temperature: 0.9,
@@ -73,44 +72,21 @@ async function runChat(userInput) {
   return response.text();
 }
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/components/chatbot.html');
-});
-app.get('/public/loader.gif', (req, res) => {
-  res.sendFile(__dirname + '/public/loader.gif');
-});
-// app.post('/chat', async (req, res) => {
-//   try {
-//     const userInput = req.body?.userInput;
-//     console.log('incoming /chat req', userInput)
-//     if (!userInput) {
-//       return res.status(400).json({ error: 'Invalid request body' });
-//     }
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
 
-//     const response = await runChat(userInput);
-//     res.json({ response });
-//   } catch (error) {
-//     console.error('Error in chat endpoint:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
-app.post('/chat', async (req, res) => {
-    try {
-      const userInput = req.body?.userInput;
-      console.log('incoming /chat req', userInput)
-      if (!userInput) {
-        return res.status(400).json({ error: 'Invalid request body' });
-      }
-  
-      const response = await runChat(userInput);
-      res.json({ response });
-    } catch (error) {
-      console.error('Error in chat endpoint:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+  try {
+    const userInput = req.body?.userInput;
+    if (!userInput) {
+      return res.status(400).json({ error: 'Invalid request body' });
     }
-  });
-  
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+    const response = await runChat(userInput);
+    res.json({ response });
+  } catch (error) {
+    console.error('Error in chatbot endpoint:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}

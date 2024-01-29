@@ -1,289 +1,198 @@
-'use client'
-import React, { useState, useEffect, useRef } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { db, auth } from "../../../../firebase/config";
-import { doc, getDoc, setDoc, collection, addDoc, getDocs, query, orderBy , updateDoc} from "firebase/firestore";
+import { db } from "../../../firebase/config";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { auth } from "../../../firebase/config";
+import { IoNotifications } from "react-icons/io5";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { update } from "firebase/database";
+import Link from "next/link";
 
-const Page = ({ params }) => {
+const Page = () => {
   const [courseData, setCourseData] = useState(null);
-  const [currentPage, setCurrentPage] = useState("home");
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
-  const [enrolledStudent, setEnrolledStudent] = useState([]);
-  const [user] = useAuthState(auth);
-
-  const scrollRef = useRef();
-
-  // Get the router object
   const router = useRouter();
-  // const [showNotification, setShowNotification] = useState(false);
-  // const [pendingRequests, setPendingRequests] = useState([]);
+  const [user] = useAuthState(auth);
+  const userSession =
+    typeof window !== "undefined" ? sessionStorage.getItem("user") : null;
+  const [hostedCourses, setHostedCourses] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
+  const [pendingRequests, setPendingRequests] = useState([]);
+  const [courseReference, setCourseReference] = useState([]);
+  const [updatenotify, setUpdateNotify] = useState(false);
 
-  // const courseId = params.courseid;
-
-  // handleAccept = (studentId) => async () => {
-  //   const docRef = doc(db, "students", studentId);
-  //   const docSnap = await getDoc(docRef);
-  //   if (docSnap.exists()) {
-  //     const studentData = docSnap.data();
-  //     const studentCourses = studentData.courses;
-  //     studentCourses.push(courseId);
-  //     await updateDoc(docRef, {
-  //       courses: studentCourses,
-  //     });
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  //   const courseDocRef = doc(db, "courses", courseId);
+  const handleReject = (studentId,index) => async () => {
+    const courseDocRef = doc(db, "courses", courseReference[index]);
+    const courseDocSnap = await getDoc(courseDocRef);
+    if(courseDocSnap.exists()){
+      const courseData = courseDocSnap.data();
+      const pendingList = courseData.pendingStudents;
+      pendingList.pop(studentId);
+      await updateDoc(courseDocRef, {
+        pendingStudents: pendingList,
+      });
+      }
+    setUpdateNotify(!updatenotify);
+    }
     
-  // }
-  // Fetch course data and enrolled students on component mount
 
-    // Fetch course data and enrolled students on component mount
-    useEffect(() => {
-      const fetchCourseData = async () => {
-        const courseRef = doc(db, "courses", params.courseid);
-        const courseSnap = await getDoc(courseRef);
-  
-        if (courseSnap.exists()) {
-          setCourseData(courseSnap.data());
-          const enrollstudentname = [];
-          if(courseSnap.data().students){
-              for(var i = 0;i<courseSnap.data().students.length;i++){
-                  const studentRef = doc(db, "students", courseSnap.data().students[i]);
-                  const studentSnap = await getDoc(studentRef);
-                  if (user && user.uid) {
-                    // Access the 'uid' property safely
-                    console.log("User UID:", user.uid);
-                  } else {
-                    console.error("User is null or undefined");
-                  }
-                  if(studentSnap.exists()){
-                      enrollstudentname.push(studentSnap.data().name);
-                  }
+  const handleAccept = (studentId,index) => async () => {
+    const docRef = doc(db, "students", studentId);
+    const docSnap = await getDoc(docRef);
+    console.log(studentId)
+    console.log(index)
+    if (docSnap.exists()) {
+      const studentData = docSnap.data();
+      const studentCourses = studentData.courses;
+      studentCourses.push(courseReference[index]);
+      await updateDoc(docRef, {
+        courses: studentCourses,
+      });
+    } else {
+      console.log("No such document!");
+    }
+    const courseDocRef = doc(db, "courses", courseReference[index]);
+    const courseDocSnap = await getDoc(courseDocRef);
+    if(courseDocSnap.exists()){
+      const courseData = courseDocSnap.data();
+      const studentList = courseData.students;
+      studentList.push(studentId);
+      console.log(pendingRequests)
+      const pendingList = courseData.pendingStudents;
+      pendingList.pop(studentId);
+      await updateDoc(courseDocRef, {
+        students: studentList,
+        pendingStudents: pendingList,
+      });
+      }
+    setUpdateNotify(!updatenotify);
+    }
+
+  useEffect(() => {
+    const getData = async () => {
+      // Check if user is authenticated
+      if (user || userSession) {
+        try {
+          const docRef = doc(
+            db,
+            "teachers",
+            user ? auth.currentUser.uid : userSession
+          );
+          const docSnap = await getDoc(docRef);
+
+          console.log(docSnap.data().courses);
+
+          if (docSnap.exists()) {
+            const courses = docSnap.data().courses;
+            const hostedCoursesData = [];
+
+            for (const courseId of courses) {
+              const courseDocSnap = await getDoc(doc(db, "courses", courseId));
+
+              if (courseDocSnap.exists()) {
+                hostedCoursesData.push(courseDocSnap.data());
+              } else {
+                console.log(`No course found with id: ${courseId}`);
               }
+            }
+
+            setHostedCourses(hostedCoursesData);
+
+            // Get pending requests
+            const pendingRequests = [];
+            const courseReference = [];
+            for(var i = 0;i<hostedCoursesData.length;i++){
+              const course = hostedCoursesData[i];
+              console.log(course.pendingStudents);
+              for(var j = 0;j<course.pendingStudents.length;j++){
+                console.log(course.pendingStudents[j])
+              const pendingRequestsData = await getDoc(doc(db, "students", course.pendingStudents[j]));
+              console.log(pendingRequestsData.data());
+              if(pendingRequestsData.exists()){
+                pendingRequests.push(pendingRequestsData.data());
+                courseReference.push(course._id)
+              }
+            }
           }
-          setEnrolledStudent(enrollstudentname);
-          setMessages(courseSnap.data().messages);
+            setPendingRequests(pendingRequests);
+            setCourseReference(courseReference);
+            console.log(pendingRequests);
+            console.log(courseReference);
+
+          } else {
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.error("Error getting document:", error.message);
         }
-      };
-  
-      fetchCourseData();
-    }, [params.courseid, newMessage, user]);
-
-  useEffect(() => {
-    const fetchCourseData = async () => {
-      const courseRef = doc(db, "courses", params.courseid);
-      const courseSnap = await getDoc(courseRef);
-
-      if (courseSnap.exists()) {
-        setCourseData(courseSnap.data());
-        // setEnrolledStudent(courseSnap.data().students);
-        setMessages(courseSnap.data().messages);
-      }
-    };
-
-    fetchCourseData();
-  }, [params.courseid, newMessage]);
-
-  const picChange = (e) => {
-    console.log(e);
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = function () {
-      console.log("profile pic base 64: ", reader.result);
-      setNewMessage(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
-
-    // Update the current page when the button is clicked
-    const handleSectionChange = (section) => {
-      setCurrentPage(section);
-      // Save the current page to local storage
-      localStorage.setItem("currentPage", section);
-    };
-
-  const handleSendMessage = async () => {
-    if (!newMessage.trim()) {
-      return; // Do not send empty messages
-    }
-  
-    const currentDate = new Date();
-  
-    const options = {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    };
-  
-    const formattedDate = currentDate.toLocaleString('en-US', options);
-  
-    try {
-      // Get the current messages document
-      const messageRef = doc(db, 'courses', params.courseid);
-      const messageData = await getDoc(messageRef);
-      
-      if (messageData.exists()) {
-        // If the document exists, update the messages field
-        const messages = messageData.data().messages || [];
-        messages.push({ message: newMessage.trim(), sender: "teacher", timestamp: formattedDate });
-  
-        // Update the document with the new messages array
-        await updateDoc(messageRef, { messages });
-  
-        // Reset the new message input
-        setNewMessage('');
       } else {
-        console.error('Messages document not found.');
+        router.replace('/teacher/signin');
       }
-    } catch (error) {
-      console.error('Error adding message:', error);
-    }
-  };
-  
+    };
 
-
-  // Scroll to the bottom of the chat window on new message
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages, currentPage]);
-
+    getData();
+  }, [user, userSession, updatenotify]);
 
   return (
-    <div className="p-4 h-full">
-    <div className=" bg-white h-full">
-  {/* Course Title */}
-  <h1 className="text-4xl font-bold mb-8 text-black font-merriweather text-center">
-    Check details of {courseData && courseData.courseName} class:
-  </h1>
+    <div className="min-h-screen bg-gray-100 px-10 py-4">
+    {/* Header */}
+    <header className=" w-full bg-secondary p-4 shadow-md flex justify-between items-center">
+      <div className="font-bold font-merriweather text-4xl">Course Page</div>
+      <button onClick={() => setShowNotification(!showNotification)}>
+      <IoNotifications className="w-10 h-10" />
+      </button>
+    </header>
 
-  {/* Section Navigation Buttons */}
-  <div className="bg-secondary p-10 rounded-lg h-96
-  ">
-  <div className="flex space-x-4 mb-8">
-    <button
-      className="px-6 py-3 bg-primary text-white rounded focus:outline-none"
-      onClick={() => handleSectionChange("home")}
-    >
-      Participants
-    </button>
-    <button
-      className="px-6 py-3 bg-primary text-white rounded focus:outline-none"
-      onClick={() => handleSectionChange("file")}
-    >
-      File
-    </button>
-    <button
-      className="px-6 py-3 bg-primary text-white rounded focus:outline-none"
-      onClick={() => handleSectionChange("message")}
-    >
-      Message
-    </button>
-  </div>
-
-  {/* Participants Section */}
-  {currentPage === "home" && courseData && (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold mb-4">Participants</h2>
-      <div className="bg-gray-200 p-3 mb-4">
-        <p className="text-black">{courseData.institutionName}</p>
-      </div>
-      {enrolledStudent &&
-        enrolledStudent.map((student, index) => (
-          <div className="bg-gray-200 p-3 mb-4" key={index}>
-            <p className="text-lg">{student}</p>
+    {/* Notifications */}
+    {showNotification && (
+      <div className="fixed top-17 right-4 w-96 h-96 bg-blue-300 p-4 rounded-md shadow-md">
+        <h2 className="text-lg font-semibold mb-2 font-merriweather">Notifications:</h2>
+        {pendingRequests.map((request, index) => (
+          <div key={request.email} className="mb-4 p-2 bg-white w-full flex justify-between items-center border border-gray-400">
+            <div>
+            <p className="text-xl">{request.name}</p>
+            <Link href={`/teacher/${user.uid}/studentProfile/${request._id}`}>
+              <p className=" text-blue-500 hover:underline cursor-pointer ">
+                {request.email}
+              </p>
+            </Link>
+            
+            </div>
+            <div>
+            <button
+              className="mr-2 px-4 py-2 rounded-md bg-primary text-white"
+              onClick={handleAccept(request._id, index)}
+            >
+              Accept
+            </button>
+            <button
+              className="px-4 py-2 rounded-md bg-gray-500 text-white"
+              onClick={handleReject(request._id, index)}
+            >
+              Reject
+            </button>
+            </div>
           </div>
         ))}
-    </div>
-  )}
+      </div>
+    )}
 
-  {/* File Section */}
-  {currentPage === "file" && (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold">File Section</h2>
-      {/* Add your file section content here */}
-    </div>
-  )}
-
-  {/* Message Section */}
-  {currentPage === "message" && (
-    <div className="flex flex-col items-center bg-red-100 p-6 rounded-lg w-96">
-      <h2 className="text-2xl font-bold mb-4">Message Section</h2>
-      <div className="overflow-y-scroll h-48 mb-4">
-        {messages.length > 0 &&
-          messages.map((message, index) => (
-            <div className="bg-gray-200 p-3 mb-4 rounded" key={index}>
-              {message.message.includes("data:image") &&
-              message.message.length > 2000 ? (
-                <img
-                  className="rounded-md w-32 h-auto"
-                  src={message.message}
-                  alt="message"
-                />
-              ) : (
-                <p className="text-lg">{message.message}</p>
-              )}
-              <p className="text-xs">Sender: {message.sender}</p>
-              <p className="text-xs">Time: {message.timestamp}</p>
+    {/* Main Content */}
+    <div className="container mx-auto py-16">
+      <h1 className="text-3xl font-bold mb-8">Your Courses</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {hostedCourses.map((course) => (
+          <Link key={course.courseName} href={`class/${course._id}`}>
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg cursor-pointer w-96">
+              <h2 className="text-xl font-semibold mb-4">{course.courseName}</h2>
+              <p className="text-gray-600 mb-2">{course.studentConstraints}</p>
+              <p className="text-gray-600">{course.location}</p>
+              <button className="mt-4 text-white bg-primary p-2 rounded-md">View Details</button>
             </div>
-          ))}
-      </div>
-
-      {/* Send Message Area */}
-      <div className="mb-4">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Enter your message"
-          className="p-2 border border-gray-300 rounded w-full"
-        />
-        {newMessage.length > 0 &&
-          newMessage.match(/\.(jpeg|jpg|gif|png)$/) && (
-            <img
-              className="w-40 h-40 mt-2 rounded-full"
-              src={newMessage}
-              alt="profile pic"
-            />
-          )}
-        <input
-          accept="image/*"
-          type="file"
-          name="image"
-          onChange={picChange}
-          autoComplete="image"
-          className="my-2"
-        />
-        <button
-          onClick={handleSendMessage}
-          className="p-2 bg-blue-500 text-white rounded"
-        >
-          Send
-        </button>
+          </Link>
+        ))}
       </div>
     </div>
-  )}
-</div>
-  {/* Generate Google Meet Link Button */}
-  <button
-    onClick={() => window.open("https://meet.google.com/", "_blank")}
-    className="px-3 py-3 bg-primary text-white rounded mt-4 focus:outline-none"
-  >
-    Generate Google Meet link
-  </button>
-</div>
-</div>
+  </div>
   );
 };
 

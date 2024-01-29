@@ -155,7 +155,7 @@ const Page = ({ params }) => {
           <h2>Participants</h2>
           Add your home section content here
           <div className="px-2 py-3 bg-gray-400 m-3">
-            <p className="text-3xl">{courseData.institutionName}</p>
+            <p className="text-3xl">{courseData.teacherName}</p>
           </div>
           {enrolledStudent &&
             enrolledStudent.map((student, index) => (
