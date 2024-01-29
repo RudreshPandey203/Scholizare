@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Siderbar from "@/app/Siderbar";
+import Siderbar from "@/components/Siderbar";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { auth } from "@/app/firebase/config";
@@ -892,15 +892,15 @@ function Page({ params }) {
                   >
                     <div className="flex flex-col justify-center gap-1 items-center hover:scale-105 transition duration-300 ease-in-out text-black text-2xl font-normal font-jacques rounded-2xl bg-secondary w-44 h-content shadow border-opacity-20 border-primary border-2">
                       <Image
-                        src={item.imageAddress}
-                        alt={item.CourseName}
+                        src={`${item.profilePic}`}
+                        alt={item.courseName}
                         className="w-44 h-40 rounded-tl-2xl rounded-tr-2xl"
                         width={200}
                         height={200}
                       />
                       <p>{item.teacherName}</p>
                       <p className="text-black text-lg font-normal font-jacques">
-                        {item.description}
+                        {item.courseName}
                       </p>
                     </div>
                   </Link>
