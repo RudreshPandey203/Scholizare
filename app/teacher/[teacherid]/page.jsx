@@ -11,7 +11,12 @@ import { useRouter } from 'next/navigation';
 function page({params}) {
 	const router = useRouter();
 	const [user] = useAuthState(auth);
+<<<<<<< HEAD
 	const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null;
+=======
+	const userSession =
+    typeof window !== "undefined" ? sessionStorage.getItem("user") : null;
+>>>>>>> 6d6eb104ce125f2e03d173d07bfe3908073a8ed6
 	const [docSnap, setDocSnap] = useState(null);
 
 
@@ -45,12 +50,12 @@ console.log(formattedDate);
 	console.log("teacher data = ",docSnap);
 	
 	return (
-		<div className="h-[100vh] overflow-y-hidden">
-			<div className="flex justify-end pr-2 pt-4">
+		<div className="h-[100vh] px-4  flex flex-col justify-center">
+			<div className="flex justify-end pr-2 -mt-10">
                 <Link href='/teacher/account'>
 				<svg
-					width="46"
-					height="45"
+					width="36"
+					height="35"
 					viewBox="0 0 46 45"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +67,12 @@ console.log(formattedDate);
 						fill="black"
 					/>
 				</svg>
+
                 </Link>
+				
 			</div>
-			<div className="flex justify-between mt-2 px-16">
+			<div className='flex flex-col'>
+			<div className="flex justify-between gap-6 md:gap-0 mt-6 md:px-20 bg-secondary py-4 rounded-xl flex-wrap h-fit w-fit xl:w-full">
 				<div className='pt-16'>
 					<div className="w-fit h-16 text-black text-5xl font-bold font-merriweather">
 						Hello {docSnap?.name},
@@ -74,7 +82,7 @@ console.log(formattedDate);
 						with recovery from unfinished learning,remediation and enrichment!
 					</div>
                     <div className='flex flex-row justify-between'>
-					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-indigo-400 rounded-2xl drop-shadow-md hover:bg-indigo-300	 flex justify-center items-center gap-1"
+					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/createForm/`}>
 						Add Course
 						<svg
@@ -91,7 +99,27 @@ console.log(formattedDate);
 							/>
 						</svg>
 					</Link>
-                    <Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-indigo-400 rounded-2xl drop-shadow-md hover:bg-indigo-300	 flex justify-center items-center gap-1"
+                    
+                    </div>
+				</div>
+				<div>
+					<Image
+						src="/teacher.png"
+						alt="Teacher Image"
+						width={400}
+						height={300}
+					/>
+				</div>
+			</div>
+			{/*lower part*/}
+			<div className='flex gap-2 flex-wrap md:flex-nowrap'>
+				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
+					<div className='text-5xl font-bold font-merriweather '>View Courses
+					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
+						Schoolz provides trained, passionate tutors to support the students
+						with recovery from unfinished learning,remediation and enrichment!
+					</div>
+					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/CoursePage/`}>
 						View Courses
 						<svg
@@ -108,19 +136,56 @@ console.log(formattedDate);
 							/>
 						</svg>
 					</Link>
-                    </div>
-				</div>
-				<div>
+					</div>
+					<div>
 					<Image
-						src="/teacher.png"
+						src="/group.png"
 						alt="Teacher Image"
-						width={400}
-						height={300}
+						width={500}
+						height={500}
+						className='w-full h-full'
 					/>
+					</div>
 				</div>
+				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
+					<div className='text-5xl font-bold font-merriweather '>Check Schedule
+					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
+						Schoolz provides trained, passionate tutors to support the students
+						with recovery from unfinished learning,remediation and enrichment!
+					</div>
+					<div class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+                    >
+						Check Calender
+						<svg
+							className="group-hover:rotate-90 ease-in-out duration-500"
+							width="11"
+							height="10"
+							viewBox="0 0 11 10"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M5.27654 0.21934C5.41869 0.0788896 5.61138 0 5.81228 0C6.01318 0 6.20587 0.0788896 6.34801 0.21934L10.644 4.46934C10.786 4.60997 10.8657 4.80059 10.8657 4.99934C10.8657 5.19809 10.786 5.38871 10.644 5.52934L6.34801 9.77934C6.20421 9.91175 6.01412 9.98385 5.8177 9.9805C5.62128 9.97714 5.43383 9.89858 5.29474 9.76134C5.15601 9.62374 5.0766 9.43829 5.07321 9.24397C5.06982 9.04965 5.1427 8.8616 5.27654 8.71934L8.27868 5.74934L0.758164 5.74934C0.557099 5.74934 0.36427 5.67032 0.222095 5.52967C0.0799208 5.38902 4.76837e-05 5.19825 4.76837e-05 4.99934C4.76837e-05 4.80043 0.0799208 4.60966 0.222095 4.46901C0.36427 4.32836 0.557099 4.24934 0.758164 4.24934L8.27868 4.24934L5.27654 1.27934C5.13457 1.13871 5.05483 0.948091 5.05483 0.74934C5.05483 0.550589 5.13457 0.359965 5.27654 0.21934Z"
+								fill="black"
+							/>
+						</svg>
+					</div>
+					</div>
+					<div>
+					<Image
+						src="/tab.png"
+						alt="Teacher Image"
+						width={500}
+						height={500}
+						className='w-full h-full'
+					/>
+					</div>
+				</div>
+				</div>
+				
 			</div>
-			{/*lower part*/}
-			<div className='w-screen h-full bg-blue-200 flex py-10 mt-3 justify-evenly'>
+
+			{/* <div className='w-screen h-full bg-blue-200 flex py-10 mt-3 justify-evenly'>
 			<div class="w-72 h-80 bg-white rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300"><Image
 						src="/calen.png"
 						alt="Teacher Image"
@@ -146,7 +211,7 @@ console.log(formattedDate);
 					/>
 					<div class="w-72 h-16 flex justify-center  text-black text-3xl font-normal font-jacques">Online Class</div>
 					</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }

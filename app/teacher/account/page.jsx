@@ -203,6 +203,7 @@ const Page = () => {
       });
 
       console.log("Data updated successfully!");
+      alert("Data updated successfully!");
     } catch (error) {
       console.error("Error updating data:", error);
     }
