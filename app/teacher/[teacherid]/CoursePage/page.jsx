@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { db } from "../../../firebase/config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth } from "../../../firebase/config";
+import { IoNotifications } from "react-icons/io5";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
 
@@ -132,63 +133,66 @@ const Page = () => {
   }, [user, userSession, updatenotify]);
 
   return (
-    <div>
-      <div className="fixed top-0 w-full flex justify-end">
-        <button onClick={() => setShowNotification(!showNotification)}>
-          notify
-        </button>
-        {showNotification && (
-        //   <div className="absolute top-8 right-0 w-96 h-96 bg-slate-300">
-        //   Notification:
-        //   <br />
-        //   {pendingRequests.length > 0 && (
-        //     <ul>
-        //       {pendingRequests.forEach((request, index) => (
-        //         <li key={request.email}>
-        //           <Link href={`/teacher/${user.uid}/studentProfile/${request._id}`}>
-        //             <p>{request.email}</p>
-        //             <p>{request.name}</p>
-        //           </Link>
-        //           <button onClick={() => handleAccept(request._id)}>Accept</button>
-        //           <button onClick={() => handleReject(request._id)}>Reject</button>
-        //         </li>
-        //       ))}
-        //     </ul>
-        //   )}
-        // </div>
-          <div className="absolute top-8 right-0 w-96 h-96 bg-slate-300">
-            Notification:
-            <br/>
-            {pendingRequests.map((request,index) => (
-              <div key={request.email}>
-                <Link href={`/teacher/${user.uid}/studentProfile/${request._id}`}><p>{request.email}</p>
-                <p>{request.name}</p></Link>
-                <button className="p-2 rounded-md bg-blue-600" onClick={handleAccept(request._id,index)}>Accept</button>
-                <button className="p-2 rounded-md bg-blue-600"
-                 onClick={handleReject(request._id,index)}
-                 >Reject</button>
-              </div>
-            ))}
+    <div className="min-h-screen bg-gray-100 px-10 py-4">
+    {/* Header */}
+    <header className=" w-full bg-secondary p-4 shadow-md flex justify-between items-center">
+      <div className="font-bold font-merriweather text-4xl">Course Page</div>
+      <button onClick={() => setShowNotification(!showNotification)}>
+      <IoNotifications className="w-10 h-10" />
+      </button>
+    </header>
+
+    {/* Notifications */}
+    {showNotification && (
+      <div className="fixed top-17 right-4 w-96 h-96 bg-primary/10 p-4 rounded-md shadow-md">
+        <h2 className="text-lg font-semibold mb-2 font-merriweather">Notifications:</h2>
+        {pendingRequests.map((request, index) => (
+          <div key={request.email} className="mb-4 p-2 bg-white w-full flex justify-between items-center border border-gray-400">
+            <div>
+            <p className="text-xl">{request.name}</p>
+            <Link href={`/teacher/${user.uid}/studentProfile/${request._id}`}>
+              <p className=" text-blue-500 hover:underline cursor-pointer ">
+                {request.email}
+              </p>
+            </Link>
+            
+            </div>
+            <div>
+            <button
+              className="mr-2 px-4 py-2 rounded-md bg-primary text-white"
+              onClick={handleAccept(request._id, index)}
+            >
+              Accept
+            </button>
+            <button
+              className="px-4 py-2 rounded-md bg-gray-500 text-white"
+              onClick={handleReject(request._id, index)}
+            >
+              Reject
+            </button>
+            </div>
           </div>
-        )}
+        ))}
       </div>
-      <div>
-        Course Page
-        <br />
+    )}
+
+    {/* Main Content */}
+    <div className="container mx-auto py-16">
+      <h1 className="text-3xl font-bold mb-8">Your Courses</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {hostedCourses.map((course) => (
-          <Link
-            className="block m-5 p-5 bg-slate-400"
-            key={course.courseName}
-            href={`class/${course._id}`}
-          >
-            <h3>{course.courseName}</h3>
-            <p>{course.studentConstraints}</p>
-            <p>{course.location}</p>
-            <p>{course.fees}</p>
+          <Link key={course.courseName} href={`class/${course._id}`}>
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg cursor-pointer w-96">
+              <h2 className="text-xl font-semibold mb-4">{course.courseName}</h2>
+              <p className="text-gray-600 mb-2">{course.studentConstraints}</p>
+              <p className="text-gray-600">{course.location}</p>
+              <button className="mt-4 text-white bg-primary p-2 rounded-md">View Details</button>
+            </div>
           </Link>
         ))}
       </div>
     </div>
+  </div>
   );
 };
 
