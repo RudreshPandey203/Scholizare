@@ -54,8 +54,11 @@ const Page = ({ params }) => {
               for(var i = 0;i<courseSnap.data().students.length;i++){
                   const studentRef = doc(db, "students", courseSnap.data().students[i]);
                   const studentSnap = await getDoc(studentRef);
-                  if(courseSnap.data().students[i] == user.uid){
-                      setStudentData(studentSnap.data());
+                  if (user && user.uid) {
+                    // Access the 'uid' property safely
+                    console.log("User UID:", user.uid);
+                  } else {
+                    console.error("User is null or undefined");
                   }
                   if(studentSnap.exists()){
                       enrollstudentname.push(studentSnap.data().name);
@@ -158,121 +161,129 @@ const Page = ({ params }) => {
 
 
   return (
+    <div className="p-4 h-full">
+    <div className=" bg-white h-full">
+  {/* Course Title */}
+  <h1 className="text-4xl font-bold mb-8 text-black font-merriweather text-center">
+    Check details of {courseData && courseData.courseName} class:
+  </h1>
 
-    <div className="overflow-y-hidden justify-center flex flex-col items-center">
-      <h1 className="text-center stroke-indigo-500 font-bold text-4xl">
-        {courseData && courseData.name}
-      </h1>
+  {/* Section Navigation Buttons */}
+  <div className="bg-secondary p-10 rounded-lg h-96
+  ">
+  <div className="flex space-x-4 mb-8">
+    <button
+      className="px-6 py-3 bg-primary text-white rounded focus:outline-none"
+      onClick={() => handleSectionChange("home")}
+    >
+      Participants
+    </button>
+    <button
+      className="px-6 py-3 bg-primary text-white rounded focus:outline-none"
+      onClick={() => handleSectionChange("file")}
+    >
+      File
+    </button>
+    <button
+      className="px-6 py-3 bg-primary text-white rounded focus:outline-none"
+      onClick={() => handleSectionChange("message")}
+    >
+      Message
+    </button>
+  </div>
 
-      <div className="flex flex-row justify-evenly">
-        <button
-          className="p-5 m-3 bg-red-200"
-          onClick={() => handleSectionChange("home")}
-        >
-          Participants
-        </button>
-        <button
-          className="p-5 m-3 bg-red-200"
-          onClick={() => handleSectionChange("file")}
-        >
-          File
-        </button>
-        <button
-          className="p-5 m-3 bg-red-200"
-          onClick={() => handleSectionChange("message")}
-        >
-          Message
-        </button>
+  {/* Participants Section */}
+  {currentPage === "home" && courseData && (
+    <div className="mb-8">
+      <h2 className="text-2xl font-bold mb-4">Participants</h2>
+      <div className="bg-gray-200 p-3 mb-4">
+        <p className="text-black">{courseData.institutionName}</p>
+      </div>
+      {enrolledStudent &&
+        enrolledStudent.map((student, index) => (
+          <div className="bg-gray-200 p-3 mb-4" key={index}>
+            <p className="text-lg">{student}</p>
+          </div>
+        ))}
+    </div>
+  )}
+
+  {/* File Section */}
+  {currentPage === "file" && (
+    <div className="mb-8">
+      <h2 className="text-2xl font-bold">File Section</h2>
+      {/* Add your file section content here */}
+    </div>
+  )}
+
+  {/* Message Section */}
+  {currentPage === "message" && (
+    <div className="flex flex-col items-center bg-red-100 p-6 rounded-lg w-96">
+      <h2 className="text-2xl font-bold mb-4">Message Section</h2>
+      <div className="overflow-y-scroll h-48 mb-4">
+        {messages.length > 0 &&
+          messages.map((message, index) => (
+            <div className="bg-gray-200 p-3 mb-4 rounded" key={index}>
+              {message.message.includes("data:image") &&
+              message.message.length > 2000 ? (
+                <img
+                  className="rounded-md w-32 h-auto"
+                  src={message.message}
+                  alt="message"
+                />
+              ) : (
+                <p className="text-lg">{message.message}</p>
+              )}
+              <p className="text-xs">Sender: {message.sender}</p>
+              <p className="text-xs">Time: {message.timestamp}</p>
+            </div>
+          ))}
       </div>
 
-      {currentPage === "home" && courseData && (
-        <div>
-          <h2>Participants</h2>
-          <div className="px-2 py-3 bg-gray-400 m-3">
-            <p className="text-3xl">{courseData.institutionName}</p>
-          </div>
-          {enrolledStudent &&
-            enrolledStudent.map((student, index) => (
-              <div className="px-2 py-3 bg-gray-400 m-3" key={index}>
-                <p className="text-3xl">{student}</p>
-              </div>
-            ))}
-        </div>
-      )}
-
-      {currentPage === "file" && (
-        <div>
-          <h2>File Section</h2>
-          {/* Add your file section content here */}
-        </div>
-      )}
-
-      {currentPage === "message" && (
-        <div className=" bg-red-100 h-[83vh] w-[80vw]">
-          <h2>Message Section</h2>
-          <div>
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Enter your message"
+      {/* Send Message Area */}
+      <div className="mb-4">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Enter your message"
+          className="p-2 border border-gray-300 rounded w-full"
+        />
+        {newMessage.length > 0 &&
+          newMessage.match(/\.(jpeg|jpg|gif|png)$/) && (
+            <img
+              className="w-40 h-40 mt-2 rounded-full"
+              src={newMessage}
+              alt="profile pic"
             />
-            {newMessage.length > 0 &&
-              newMessage.match(/\.(jpeg|jpg|gif|png)$/) && (
-                <img
-                  className="w-40 h-40 border-spacing-3 rounded-full"
-                  src={newMessage}
-                  alt="profile pic"
-                />
-              )}
-            <input
-              accept="image/*"
-              type="file"
-              name="image"
-              onChange={picChange}
-              autoComplete="image"
-            />
-            <button onClick={handleSendMessage}>Send</button>
-          </div>
-          <div
-            className="overflow-y-scroll scroll-m-4 h-[70vh]"
-            ref={scrollRef}
-          >
-            {messages.length > 0 &&
-              messages.map((message, index) => (
-                <div className="px-2 py-3 bg-gray-400 m-3" key={index}>
-                  {message.message.includes("data:image") &&
-                  message.message.length > 2000 ? (
-                    <img
-                      className="rounded-md w-32 h-auto"
-                      src={message.message}
-                    />
-                  ) : (
-                    <p className="text-3xl">{message.message}</p>
-                  )}
-                  <p className="text-xs">Sender: {message.sender}</p>
-                  <p className="text-xs">Time: {message.timestamp}</p>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
-      
-      <button
-  onClick={() => window.open("https://meet.google.com/", "_blank")}
-  className="p-5 m-3 bg-red-200"
->
-  Generate Google Meet link
-</button>
-
-      {/* <button
-        target="iframe_a"
-        onClick={() => window.open("https://meet.google.com/")}
-        className="p-5 m-3 bg-red-200"
-      >
-        Generate google meet link
-      </button> */}
+          )}
+        <input
+          accept="image/*"
+          type="file"
+          name="image"
+          onChange={picChange}
+          autoComplete="image"
+          className="my-2"
+        />
+        <button
+          onClick={handleSendMessage}
+          className="p-2 bg-blue-500 text-white rounded"
+        >
+          Send
+        </button>
+      </div>
     </div>
+  )}
+</div>
+  {/* Generate Google Meet Link Button */}
+  <button
+    onClick={() => window.open("https://meet.google.com/", "_blank")}
+    className="px-3 py-3 bg-primary text-white rounded mt-4 focus:outline-none"
+  >
+    Generate Google Meet link
+  </button>
+</div>
+</div>
   );
 };
 
