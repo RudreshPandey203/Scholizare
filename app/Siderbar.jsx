@@ -97,7 +97,8 @@ function Siderbar({ params }) {
 						</svg>
 					</div>
 				</Link>
-				<div className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques  ">
+				<Link className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques  "
+				href="http://localhost:4000/">
 					<p>Solve Doubts</p>
 					<div className="p-2">
 						<svg
@@ -113,7 +114,7 @@ function Siderbar({ params }) {
 							/>
 						</svg>
 					</div>
-				</div>
+				</Link>
 				<div className="flex active:bg-primary hover:bg-primary rounded-md p-2 border-2 border-secondary w-52 ease-out duration-500 transition-all h-content cursor-pointer justify-between text-black text-2xl font-medium font-jacques  ">
 					<p>Wellness</p>
 					<div className="p-2">
