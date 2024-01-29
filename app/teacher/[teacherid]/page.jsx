@@ -80,7 +80,7 @@ console.log(formattedDate);
 						with recovery from unfinished learning,remediation and enrichment!
 					</div>
                     <div className='flex flex-row justify-between'>
-					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+					<Link class="group w-40 h-14 text-white text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/createForm/`}>
 						Add Course
 						<svg
@@ -88,12 +88,13 @@ console.log(formattedDate);
 							width="11"
 							height="10"
 							viewBox="0 0 11 10"
-							fill="none"
+							fill="white"
 							xmlns="http://www.w3.org/2000/svg"
+							
 						>
 							<path
 								d="M5.27654 0.21934C5.41869 0.0788896 5.61138 0 5.81228 0C6.01318 0 6.20587 0.0788896 6.34801 0.21934L10.644 4.46934C10.786 4.60997 10.8657 4.80059 10.8657 4.99934C10.8657 5.19809 10.786 5.38871 10.644 5.52934L6.34801 9.77934C6.20421 9.91175 6.01412 9.98385 5.8177 9.9805C5.62128 9.97714 5.43383 9.89858 5.29474 9.76134C5.15601 9.62374 5.0766 9.43829 5.07321 9.24397C5.06982 9.04965 5.1427 8.8616 5.27654 8.71934L8.27868 5.74934L0.758164 5.74934C0.557099 5.74934 0.36427 5.67032 0.222095 5.52967C0.0799208 5.38902 4.76837e-05 5.19825 4.76837e-05 4.99934C4.76837e-05 4.80043 0.0799208 4.60966 0.222095 4.46901C0.36427 4.32836 0.557099 4.24934 0.758164 4.24934L8.27868 4.24934L5.27654 1.27934C5.13457 1.13871 5.05483 0.948091 5.05483 0.74934C5.05483 0.550589 5.13457 0.359965 5.27654 0.21934Z"
-								fill="black"
+								fill="white"
 							/>
 						</svg>
 					</Link>
@@ -117,7 +118,7 @@ console.log(formattedDate);
 						Schoolz provides trained, passionate tutors to support the students
 						with recovery from unfinished learning,remediation and enrichment!
 					</div>
-					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+					<Link class="group w-40 h-14 text-white text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/CoursePage/`}>
 						View Courses
 						<svg
@@ -130,7 +131,7 @@ console.log(formattedDate);
 						>
 							<path
 								d="M5.27654 0.21934C5.41869 0.0788896 5.61138 0 5.81228 0C6.01318 0 6.20587 0.0788896 6.34801 0.21934L10.644 4.46934C10.786 4.60997 10.8657 4.80059 10.8657 4.99934C10.8657 5.19809 10.786 5.38871 10.644 5.52934L6.34801 9.77934C6.20421 9.91175 6.01412 9.98385 5.8177 9.9805C5.62128 9.97714 5.43383 9.89858 5.29474 9.76134C5.15601 9.62374 5.0766 9.43829 5.07321 9.24397C5.06982 9.04965 5.1427 8.8616 5.27654 8.71934L8.27868 5.74934L0.758164 5.74934C0.557099 5.74934 0.36427 5.67032 0.222095 5.52967C0.0799208 5.38902 4.76837e-05 5.19825 4.76837e-05 4.99934C4.76837e-05 4.80043 0.0799208 4.60966 0.222095 4.46901C0.36427 4.32836 0.557099 4.24934 0.758164 4.24934L8.27868 4.24934L5.27654 1.27934C5.13457 1.13871 5.05483 0.948091 5.05483 0.74934C5.05483 0.550589 5.13457 0.359965 5.27654 0.21934Z"
-								fill="black"
+								fill="white"
 							/>
 						</svg>
 					</Link>
@@ -151,7 +152,7 @@ console.log(formattedDate);
 						Schoolz provides trained, passionate tutors to support the students
 						with recovery from unfinished learning,remediation and enrichment!
 					</div>
-					<div class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+					<div class="group w-40 h-14 text-white text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     >
 						Check Calender
 						<svg
@@ -164,7 +165,7 @@ console.log(formattedDate);
 						>
 							<path
 								d="M5.27654 0.21934C5.41869 0.0788896 5.61138 0 5.81228 0C6.01318 0 6.20587 0.0788896 6.34801 0.21934L10.644 4.46934C10.786 4.60997 10.8657 4.80059 10.8657 4.99934C10.8657 5.19809 10.786 5.38871 10.644 5.52934L6.34801 9.77934C6.20421 9.91175 6.01412 9.98385 5.8177 9.9805C5.62128 9.97714 5.43383 9.89858 5.29474 9.76134C5.15601 9.62374 5.0766 9.43829 5.07321 9.24397C5.06982 9.04965 5.1427 8.8616 5.27654 8.71934L8.27868 5.74934L0.758164 5.74934C0.557099 5.74934 0.36427 5.67032 0.222095 5.52967C0.0799208 5.38902 4.76837e-05 5.19825 4.76837e-05 4.99934C4.76837e-05 4.80043 0.0799208 4.60966 0.222095 4.46901C0.36427 4.32836 0.557099 4.24934 0.758164 4.24934L8.27868 4.24934L5.27654 1.27934C5.13457 1.13871 5.05483 0.948091 5.05483 0.74934C5.05483 0.550589 5.13457 0.359965 5.27654 0.21934Z"
-								fill="black"
+								fill="white"
 							/>
 						</svg>
 					</div>
