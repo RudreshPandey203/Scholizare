@@ -1,6 +1,10 @@
 'use client'
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { MdOutlineGroup } from "react-icons/md";
+import { FaFileAlt } from "react-icons/fa";
+import { BiMessageRoundedDetail } from "react-icons/bi";
+import { IoSend } from "react-icons/io5";
 import { db, auth } from "../../../../firebase/config";
 import { doc, getDoc, setDoc, collection, addDoc, getDocs, query, orderBy , updateDoc} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -158,47 +162,58 @@ const Page = ({ params }) => {
 
 
   return (
-
-    <div className="overflow-y-hidden justify-center flex flex-col items-center">
-      <h1 className="text-center stroke-indigo-500 font-bold text-4xl">
-        {courseData && courseData.name}
+    <div className="py-4 px-6">
+    <div className="flex flex-col gap-6">
+      <h1 className="font-merriweather stroke-indigo-500 font-bold text-4xl">
+        View {courseData && courseData.courseName} class details:
       </h1>
-
-      <div className="flex flex-row justify-evenly">
+      <div className="bg-secondary p-4  rounded-lg h-fit">
+      <div className="flex flex-row justify-evenly ">
         <button
-          className="p-5 m-3 bg-red-200"
+          className="w-32 h-14 flex items-center justify-center gap-1 px-1 shadow-md bg-primary text-white font-md hover:bg-blue-600 transition  text-xl rounded-lg"
           onClick={() => handleSectionChange("home")}
         >
           Participants
+          <MdOutlineGroup className="mt-1 w-10 h-10" />
         </button>
         <button
-          className="p-5 m-3 bg-red-200"
+          className="w-32 h-14 shadow-md bg-primary flex items-center justify-center gap-1 px-1  text-white font-md hover:bg-blue-600 transition  text-xl rounded-lg"
           onClick={() => handleSectionChange("file")}
         >
           File
+          <FaFileAlt className="mt-1 w-4 h-4" />
         </button>
         <button
-          className="p-5 m-3 bg-red-200"
+          className="w-32 h-14 shadow-md flex items-center justify-center gap-1 px-1  bg-primary text-white font-md hover:bg-blue-600 transition  text-xl rounded-lg"
           onClick={() => handleSectionChange("message")}
         >
           Message
+          <BiMessageRoundedDetail className="mt-1 w-4 h-4" />
         </button>
       </div>
 
       {currentPage === "home" && courseData && (
-        <div>
-          <h2>Participants</h2>
-          <div className="px-2 py-3 bg-gray-400 m-3">
-            <p className="text-3xl">{courseData.teacherName}</p>
-          </div>
-          {enrolledStudent &&
-            enrolledStudent.map((student, index) => (
-              <div className="px-2 py-3 bg-gray-400 m-3" key={index}>
-                <p className="text-3xl">{student}</p>
-              </div>
-            ))}
-        </div>
-      )}
+  <div className=" m-auto w-full  px-10 py-4 rounded-lg mt-4 bg-white">
+    <h2 className="font-merriweather  text-4xl border-b mb-10">Participants:</h2>
+    <div className=" m-3">
+      <div className="text-3xl w-fit font-medium font-merriweather">
+        <div>{courseData.teacherName}</div> 
+        <div className="font-thin text-base ">~teacher</div>
+      </div>
+    </div>
+    {enrolledStudent && (
+      <nav>
+      <ol className="list-decimal pl-4  text-xl ">
+        {enrolledStudent.map((student, index) => (
+          <li className="py-3  m-3 " key={index}>
+            <p className="text-2xl">{student}</p>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    )}
+  </div>
+)}
 
       {currentPage === "file" && (
         <div>
@@ -207,60 +222,63 @@ const Page = ({ params }) => {
         </div>
       )}
 
-      {currentPage === "message" && (
-        <div className=" bg-red-100 h-[83vh] w-[80vw]">
-          <h2>Message Section</h2>
-          <div>
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Enter your message"
-            />
-            {newMessage.length > 0 &&
-              newMessage.match(/\.(jpeg|jpg|gif|png)$/) && (
-                <img
-                  className="w-40 h-40 border-spacing-3 rounded-full"
-                  src={newMessage}
-                  alt="profile pic"
-                />
-              )}
-            <input
-              accept="image/*"
-              type="file"
-              name="image"
-              onChange={picChange}
-              autoComplete="image"
-            />
-            <button onClick={handleSendMessage}>Send</button>
+{currentPage === "message" && (
+  <div className="bg-white  w-full mt-10 p-6 rounded-lg">
+    <h2 className="text-2xl font-bold mb-4">Message Section</h2>
+    
+    <div className="overflow-y-scroll h-[70vh]">
+      {messages.length > 0 &&
+        messages.map((message, index) => (
+          <div className="bg-secondary w-fit  p-4 m-3 rounded-r-2xl rounded-b-2xl" key={index}>
+            {message.message.includes("data:image") &&
+            message.message.length > 2000 ? (
+              <img
+                className="rounded-md w-32 h-auto"
+                src={message.message}
+                alt="message"
+              />
+            ) : (
+              <p className="text-lg">{message.message}</p>
+            )}
+            <p className="text-xs">Sender: {message.sender}</p>
+            <p className="text-xs">Time: {message.timestamp}</p>
           </div>
-          <div
-            className="overflow-y-scroll scroll-m-4 h-[70vh]"
-            ref={scrollRef}
-          >
-            {messages.length > 0 &&
-              messages.map((message, index) => (
-                <div className="px-2 py-3 bg-gray-400 m-3" key={index}>
-                  {message.message.includes("data:image") &&
-                  message.message.length > 2000 ? (
-                    <img
-                      className="rounded-md w-32 h-auto"
-                      src={message.message}
-                    />
-                  ) : (
-                    <p className="text-3xl">{message.message}</p>
-                  )}
-                  <p className="text-xs">Sender: {message.sender}</p>
-                  <p className="text-xs">Time: {message.timestamp}</p>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
+        ))}
+    </div>
+    <div className="flex items-center mb-4">
+      <input
+        type="text"
+        value={newMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        placeholder="Enter your message"
+        className="p-2 border border-gray-300 rounded mr-2 flex-grow"
+      />
+      <label className="file-input-label">
+  <FaFileAlt className=" w-8 h-8 cursor-pointer" />
+  <input
+        accept="image/*"
+        type="file"
+        name="image"
+        onChange={picChange}
+        autoComplete="image"
+        className="hidden"
+      />
+</label>
+      
+      <button
+        onClick={handleSendMessage}
+      >
+        <IoSend className="w-8 h-8"/>
+      </button>
+    </div>
+  </div>
+)}
+
+      </div>
       
       <button
   onClick={() => window.open("https://meet.google.com/", "_blank")}
-  className="p-5 m-3 bg-red-200"
+  className="w-42 text-white rounded-lg p-5 m-auto bg-primary"
 >
   Generate Google Meet link
 </button>
@@ -272,6 +290,7 @@ const Page = ({ params }) => {
       >
         Generate google meet link
       </button> */}
+    </div>
     </div>
   );
 };
