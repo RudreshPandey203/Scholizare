@@ -11,8 +11,9 @@ import { useRouter } from 'next/navigation';
 function page({params}) {
 	const router = useRouter();
 	const [user] = useAuthState(auth);
-	const userSession = sessionStorage.getItem('user');
+	const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null;
 	const [docSnap, setDocSnap] = useState(null);
+
 
 	const currentDate = new Date();
 
