@@ -11,7 +11,8 @@ import { useRouter } from 'next/navigation';
 function page({params}) {
 	const router = useRouter();
 	const [user] = useAuthState(auth);
-	const userSession = sessionStorage.getItem('user');
+	const userSession =
+    typeof window !== "undefined" ? sessionStorage.getItem("user") : null;
 	const [docSnap, setDocSnap] = useState(null);
 
 	const currentDate = new Date();
@@ -46,10 +47,21 @@ console.log(formattedDate);
 	return (
 		<div className="h-[100vh] overflow-y-hidden">
 			<div className="flex justify-end pr-2 pt-4">
+			<svg width="36"
+					height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_247_2)">
+<path d="M14.9998 19C15 19.5046 14.8094 19.9906 14.4664 20.3605C14.1233 20.7305 13.653 20.9572 13.1498 20.995L12.9998 21H10.9998C10.4953 21.0002 10.0093 20.8096 9.6393 20.4665C9.26932 20.1234 9.04269 19.6532 9.00485 19.15L8.99985 19H14.9998ZM11.9998 2C13.8148 1.99997 15.5589 2.70489 16.8641 3.96607C18.1693 5.22726 18.9336 6.94609 18.9958 8.76L18.9998 9V12.764L20.8218 16.408C20.9014 16.567 20.9412 16.7429 20.9378 16.9206C20.9345 17.0984 20.8881 17.2727 20.8027 17.4286C20.7173 17.5845 20.5953 17.7174 20.4473 17.8158C20.2993 17.9143 20.1297 17.9754 19.9528 17.994L19.8378 18H4.16185C3.98401 18.0001 3.80882 17.957 3.65127 17.8745C3.49372 17.792 3.35853 17.6725 3.25727 17.5264C3.156 17.3802 3.0917 17.2116 3.06985 17.0351C3.04801 16.8586 3.06928 16.6795 3.13185 16.513L3.17785 16.408L4.99985 12.764V9C4.99985 7.14348 5.73735 5.36301 7.0501 4.05025C8.36286 2.7375 10.1433 2 11.9998 2Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="clip0_247_2">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
                 <Link href='/teacher/account'>
 				<svg
-					width="46"
-					height="45"
+					width="36"
+					height="35"
 					viewBox="0 0 46 45"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +73,9 @@ console.log(formattedDate);
 						fill="black"
 					/>
 				</svg>
+
                 </Link>
+				
 			</div>
 			<div className="flex justify-between mt-2 px-16">
 				<div className='pt-16'>
@@ -73,7 +87,7 @@ console.log(formattedDate);
 						with recovery from unfinished learning,remediation and enrichment!
 					</div>
                     <div className='flex flex-row justify-between'>
-					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-indigo-400 rounded-2xl drop-shadow-md hover:bg-indigo-300	 flex justify-center items-center gap-1"
+					<Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/createForm/`}>
 						Add Course
 						<svg
@@ -90,7 +104,7 @@ console.log(formattedDate);
 							/>
 						</svg>
 					</Link>
-                    <Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-indigo-400 rounded-2xl drop-shadow-md hover:bg-indigo-300	 flex justify-center items-center gap-1"
+                    <Link class="group w-40 h-14 text-black text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
                     href={`${params.teacherid}/CoursePage/`}>
 						View Courses
 						<svg
@@ -119,7 +133,7 @@ console.log(formattedDate);
 				</div>
 			</div>
 			{/*lower part*/}
-			<div className='w-screen h-full bg-blue-200 flex py-10 mt-3 justify-evenly'>
+			{/* <div className='w-screen h-full bg-blue-200 flex py-10 mt-3 justify-evenly'>
 			<div class="w-72 h-80 bg-white rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300"><Image
 						src="/calen.png"
 						alt="Teacher Image"
@@ -145,7 +159,7 @@ console.log(formattedDate);
 					/>
 					<div class="w-72 h-16 flex justify-center  text-black text-3xl font-normal font-jacques">Online Class</div>
 					</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
