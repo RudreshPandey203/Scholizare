@@ -45,8 +45,8 @@ console.log(formattedDate);
 	console.log("teacher data = ",docSnap);
 	
 	return (
-		<div className="h-[100vh] p-4 ">
-			<div className="flex justify-end pr-2 ">
+		<div className="h-[100vh] px-4  flex flex-col justify-center">
+			<div className="flex justify-end pr-2 -mt-10">
                 <Link href='/teacher/account'>
 				<svg
 					width="36"
@@ -66,6 +66,7 @@ console.log(formattedDate);
                 </Link>
 				
 			</div>
+			<div className='flex flex-col'>
 			<div className="flex justify-between gap-6 md:gap-0 mt-6 md:px-20 bg-secondary py-4 rounded-xl flex-wrap h-fit w-fit xl:w-full">
 				<div className='pt-16'>
 					<div className="w-fit h-16 text-black text-5xl font-bold font-merriweather">
@@ -106,7 +107,7 @@ console.log(formattedDate);
 				</div>
 			</div>
 			{/*lower part*/}
-			<div className='flex gap-2 '>
+			<div className='flex gap-2 flex-wrap md:flex-nowrap'>
 				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
 					<div className='text-5xl font-bold font-merriweather '>View Courses
 					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
@@ -174,6 +175,7 @@ console.log(formattedDate);
 						className='w-full h-full'
 					/>
 					</div>
+				</div>
 				</div>
 				
 			</div>
