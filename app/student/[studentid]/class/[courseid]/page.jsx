@@ -47,7 +47,7 @@ const Page = ({ params }) => {
     };
 
     fetchCourseData();
-  }, [params.courseid, newMessage]);
+  }, [params.courseid, newMessage, user]);
 
   const picChange = (e) => {
     console.log(e);
