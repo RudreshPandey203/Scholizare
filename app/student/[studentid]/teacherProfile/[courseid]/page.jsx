@@ -125,47 +125,57 @@ function Page({ params }) {
   };
 
   return (
-    <div>
-      <div className="flex flex-row justify-between items-center">
-        {course && (
-          <div>
-            <p>{course.courseName}</p>
-            <p>{course.latitude}</p>
-            <p>{course.longitude}</p>
-          </div>
-        )}
+    <div className="flex flex-col items-center p-4">
+      <h1 className="font-merriweather text-5xl"> Intrested Courses:</h1>
+  <div className="flex flex-col justify-between items-center p-4 mt-10 gap-4 bg-secondary">
+    {course && (
+      <div>
+        <p className="text-xl font-bold">{course.courseName}</p>
+        <p>Latitude: {course.latitude}</p>
+        <p>Longitude: {course.longitude}</p>
+      </div>
+    )}
+    {enroll === 0 && (
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        onClick={handleEnroll}
+      >
+        Enroll
+      </button>
+    )}
+    {enroll === 1 && (
+      <button
+        className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
+        onClick={handlePending}
+        disabled
+      >
+        Pending
+      </button>
+    )}
+    {enroll === 2 && (
+      <div className="flex items-center space-x-4">
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+          onClick={handleUnenroll}
+        >
+          Unenroll
+        </button>
+        <Link
+          href={`/student/${params.studentid}/class/${params.courseid}`}
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+        >
+          Messages
+        </Link>
+      </div>
+    )}
 
-        {enroll == 0 && (
-          <button className="bg-slate-300" onClick={handleEnroll}>
-            Enroll
-          </button>
-        )}
-        {enroll == 1 && (
-          <button className="bg-slate-300" onClick={handlePending}>
-            Pending
-          </button>
-        )}
-        {enroll == 2 && (
-          <div>
-            <button onClick={handleUnenroll} className="bg-slate-300">
-              Unenroll
-            </button>
-            <Link
-              href={`/student/${params.studentid}/class/${params.courseid}`}
-              className="bg-slate-300"
-            >
-              Messages
-            </Link>
-          </div>
-        )}
-
-        {course && (
-          <div>
-            <GooglePayButton
-              environment="TEST"
-              buttonSizeMode="fill"
-              paymentRequest={{
-                apiVersion: 2,
+    {course && (
+      <div>
+        <GooglePayButton
+          environment="TEST"
+          buttonSizeMode="fill"
+          paymentRequest={{
+            apiVersion: 2,
                 apiVersionMinor: 0,
                 allowedPaymentMethods: [
                   {
@@ -199,12 +209,13 @@ function Page({ params }) {
                   console.log("Payment authorized:", paymentData);
                   return { transactionState: "SUCCESS" };
                 },
-              }}
-            />
-          </div>
-        )}
+          }}
+        />
       </div>
-    </div>
+    )}
+  </div>
+</div>
+
   );
 }
 
