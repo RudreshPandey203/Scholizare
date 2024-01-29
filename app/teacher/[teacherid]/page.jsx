@@ -11,9 +11,12 @@ import { useRouter } from 'next/navigation';
 function page({params}) {
 	const router = useRouter();
 	const [user] = useAuthState(auth);
+
+
 	const userSession =
     typeof window !== "undefined" ? sessionStorage.getItem("user") : null;
 	const [docSnap, setDocSnap] = useState(null);
+
 
 	const currentDate = new Date();
 
@@ -47,7 +50,7 @@ console.log(formattedDate);
 	return (
 		<div className="h-[100vh] px-4  flex flex-col justify-center">
 			<div className="flex justify-end pr-2 -mt-10">
-                <Link href='/teacher/account'>
+                <Link className='p-2' href='/teacher/account'>
 				<svg
 					width="36"
 					height="35"

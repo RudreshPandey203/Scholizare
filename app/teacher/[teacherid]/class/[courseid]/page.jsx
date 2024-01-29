@@ -40,6 +40,36 @@ const Page = ({ params }) => {
     
   // }
   // Fetch course data and enrolled students on component mount
+
+    // Fetch course data and enrolled students on component mount
+    useEffect(() => {
+      const fetchCourseData = async () => {
+        const courseRef = doc(db, "courses", params.courseid);
+        const courseSnap = await getDoc(courseRef);
+  
+        if (courseSnap.exists()) {
+          setCourseData(courseSnap.data());
+          const enrollstudentname = [];
+          if(courseSnap.data().students){
+              for(var i = 0;i<courseSnap.data().students.length;i++){
+                  const studentRef = doc(db, "students", courseSnap.data().students[i]);
+                  const studentSnap = await getDoc(studentRef);
+                  if(courseSnap.data().students[i] == user.uid){
+                      setStudentData(studentSnap.data());
+                  }
+                  if(studentSnap.exists()){
+                      enrollstudentname.push(studentSnap.data().name);
+                  }
+              }
+          }
+          setEnrolledStudent(enrollstudentname);
+          setMessages(courseSnap.data().messages);
+        }
+      };
+  
+      fetchCourseData();
+    }, [params.courseid, newMessage, user]);
+
   useEffect(() => {
     const fetchCourseData = async () => {
       const courseRef = doc(db, "courses", params.courseid);
@@ -47,7 +77,7 @@ const Page = ({ params }) => {
 
       if (courseSnap.exists()) {
         setCourseData(courseSnap.data());
-        setEnrolledStudent(courseSnap.data().students);
+        // setEnrolledStudent(courseSnap.data().students);
         setMessages(courseSnap.data().messages);
       }
     };
@@ -157,9 +187,7 @@ const Page = ({ params }) => {
 
       {currentPage === "home" && courseData && (
         <div>
-          hello
           <h2>Participants</h2>
-          Add your home section content here
           <div className="px-2 py-3 bg-gray-400 m-3">
             <p className="text-3xl">{courseData.institutionName}</p>
           </div>
