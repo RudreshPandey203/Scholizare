@@ -201,7 +201,7 @@ const Page = ({ params }) => {
             <button onClick={handleSendMessage}>Send</button>
           </div>
           <div
-            className="overflow-y-scroll scroll-m-4 h-[70vh]"
+            className="overflow-y-scroll scroll-m-4 h-[60vh]"
             ref={scrollRef}
           >
             {messages.length > 0 &&

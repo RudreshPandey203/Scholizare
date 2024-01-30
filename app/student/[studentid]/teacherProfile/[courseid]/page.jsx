@@ -126,7 +126,7 @@ function Page({ params }) {
 
   return (
     <div className="flex flex-col items-center p-4">
-      <h1 className="font-merriweather text-5xl"> Intrested Courses:</h1>
+      <h1 className="font-merriweather text-5xl"> Course </h1>
   <div className="flex flex-col justify-between items-center p-4 mt-10 gap-4 bg-secondary">
     {course && (
       <div>

@@ -226,7 +226,7 @@ const Page = ({ params }) => {
   <div className="bg-white  w-full mt-10 p-6 rounded-lg">
     <h2 className="text-2xl font-bold mb-4">Message Section</h2>
     
-    <div className="overflow-y-scroll h-[70vh]">
+    <div className="overflow-y-scroll h-[60vh]">
       {messages.length > 0 &&
         messages.map((message, index) => (
           <div className="bg-secondary w-fit  p-4 m-3 rounded-r-2xl rounded-b-2xl" key={index}>
