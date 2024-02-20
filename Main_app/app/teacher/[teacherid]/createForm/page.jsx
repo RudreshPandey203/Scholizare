@@ -315,7 +315,7 @@ const RegisterCourseForm = () => {
     <div className="w-content h-fit mx-auto  bg-secondary rounded-md px-6 py-4">
       
       
-      <div className=" flex justify-between  gap-20 flex-wrap-reverse">
+      <div className="flex justify-between  gap-20 md:flex-nowrap flex-wrap-reverse">
         <form name="fillform" className="flex flex-col gap-2 " onSubmit={handleSubmit}>
           <div className="">
             <label
