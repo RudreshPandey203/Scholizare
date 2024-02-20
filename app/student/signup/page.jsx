@@ -75,27 +75,27 @@ const Signup = () => {
     className="flex flex-col text-center justify-center items-center w-full h-screen bg-cover"
     style={{ backgroundImage: "url('/bg.png')" }}
     >
-      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url(' ')" }}>
+      <div className="absolute top-5 left-3 md:w-[26rem] h-32" style={{ backgroundImage: "url(' ')" }}>
       </div>
-    <div className="shadow-lg  h-content py-2 px-2 bg-white bg-opacity-10 rounded-3xl border border-black border-opacity-0 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-4xl font-jacques">
-      <h1 className="font-bold my-4 text-6xl text-primary">Register</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4 pt-2 items-center">
+    <div className="w-content md:w-[35rem]  shadow-lg  h-content py-2 px-2 bg-white bg-opacity-10 rounded-3xl border border-black border-opacity-0 backdrop-blur-sm flex flex-col items-center justify-center gap-4 text-4xl font-jacques">
+      <h1 className="w-content font-bold my-4 text-6xl text-primary">Register</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4 pt-2 items-center w-full">
             <input
                 type="text"
                 placeholder="Full Name"
-                className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+                className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1 w-full"
                 onChange={(e) => setName(e.target.value)}
             />
           <input
             type="text"
             placeholder="Email"
-            className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+            className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1 w-full"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
-            className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+            className="w-full border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
             onChange={(e) => setPassword(e.target.value)}
           />
           <button

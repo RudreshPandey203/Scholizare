@@ -28,11 +28,11 @@ function page({ params }) {
   }, [user]);
 
   return (
-    <div>
-      <h1>Student Details</h1>
+    <div className="p-4 w-full">
+      <div className="font-jacques text-4xl font-semibold text-center w-full">Student Details</div>
       {studentData && (
       <div>
-        <h3>Name : {studentData.name}</h3>
+        <h3 className="text-center text-2xl">Name : {studentData.name}</h3>
       </div>
       )} 
     </div>

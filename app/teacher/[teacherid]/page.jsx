@@ -48,8 +48,8 @@ console.log(formattedDate);
 	console.log("teacher data = ",docSnap);
 	
 	return (
-		<div className="h-[100vh] px-4  flex flex-col justify-center">
-			<div className="flex justify-end pr-2 -mt-10">
+		<div className="h-screen px-4 pt-10 md:pt-0  flex flex-col justify-center">
+			<div className="flex justify-end pr-2 item-start ">
                 <Link className='p-2' href='/teacher/account'>
 				<svg
 					width="36"
@@ -70,9 +70,9 @@ console.log(formattedDate);
 				
 			</div>
 			<div className='flex flex-col'>
-			<div className="flex justify-between gap-6 md:gap-0 mt-6 md:px-20 bg-secondary py-4 rounded-xl flex-wrap h-fit w-fit xl:w-full">
+			<div className="flex justify-between gap-6 md:gap-0 mt-6 md:px-20 bg-secondary py-4 rounded-xl p-4 h-fit w-fit xl:w-full">
 				<div className='pt-16'>
-					<div className="w-fit h-16 text-black text-5xl font-bold font-merriweather">
+					<div className="w-fit h-fit text-black text-5xl md:text-5xl font-bold font-merriweather">
 						Hello {docSnap?.name},
 					</div>
 					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois']">
@@ -101,7 +101,7 @@ console.log(formattedDate);
                     
                     </div>
 				</div>
-				<div>
+				<div className='hidden md:block'>
 					<Image
 						src="/teacher.png"
 						alt="Teacher Image"
@@ -112,7 +112,7 @@ console.log(formattedDate);
 			</div>
 			{/*lower part*/}
 			<div className='flex gap-2 flex-wrap md:flex-nowrap'>
-				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
+				<div className='flex  justify-between md:pl-20 pl-4  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-full xl:w-1/2'>
 					<div className='text-5xl font-bold font-merriweather '>View Courses
 					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
 						Schoolz provides trained, passionate tutors to support the students
@@ -136,7 +136,7 @@ console.log(formattedDate);
 						</svg>
 					</Link>
 					</div>
-					<div>
+					<div className='hidden md:block'>
 					<Image
 						src="/group.png"
 						alt="Teacher Image"
@@ -146,7 +146,7 @@ console.log(formattedDate);
 					/>
 					</div>
 				</div>
-				<div className='flex  justify-between pl-20  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-fit xl:w-1/2'>
+				<div className='flex  justify-between md:pl-20 pl-4  md:gap-0 mt-6  bg-secondary py-4 rounded-xl  h-fit w-full  xl:w-1/2'>
 					<div className='text-5xl font-bold font-merriweather '>Check Schedule
 					<div class="w-96 h-28 text-black text-base font-normal font-['Jacques Francois'] mt-4">
 						Schoolz provides trained, passionate tutors to support the students
@@ -170,7 +170,7 @@ console.log(formattedDate);
 						</svg>
 					</div>
 					</div>
-					<div>
+					<div className='hidden md:block'>
 					<Image
 						src="/tab.png"
 						alt="Teacher Image"

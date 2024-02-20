@@ -43,21 +43,21 @@ const Login = () => {
 
     return (
       <div className="flex flex-col text-center justify-center items-center w-screen h-screen bg-cover pt-10" style={{ backgroundImage: "url('/classroom.png')" }}>
-      <div className="absolute top-5 left-3 w-[26rem] h-32" style={{ backgroundImage: "url('   ')" }}>
+      <div className="absolute top-5 left-3 md:w-[26rem] w-20 h-32" style={{ backgroundImage: "url('   ')" }}>
             </div>
-            <div className="flex flex-col items-center justify-center gap-4 text-4xl font-jacques h-content  py-2 px-2 backdrop-blur-sm bg-white bg-opacity-10 rounded-3xl shadow border-4 border-black border-opacity-0">
-              <h1 className="font-bold my-4 text-6xl text-primary">Login</h1>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4 py-3 items-center">
+            <div className="w-content md:w-[35rem] flex flex-col items-center justify-center gap-4 text-4xl font-jacques h-content  py-2 px-2 backdrop-blur-sm bg-white bg-opacity-10 rounded-3xl shadow border-4 border-black border-opacity-0">
+              <h1 className="w-content font-bold my-4 text-6xl text-primary">Login</h1>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:px-4 py-3 items-center w-full">
                 <input
                   type="text"
                   placeholder="Email"
-                  className="border-2 rounded-md shadow-xl outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+                  className="border-2 rounded-md shadow-xl outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1 w-full"
                   onChange={(e)=>{setEmail(e.target.value)}}
                 />
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border-2 rounded-md  shadow-xl  outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+                  className="border-2 rounded-md  shadow-xl  outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1 w-full"
                   onChange = {(e)=>{setPassword(e.target.value)}}
                 />
                 <button

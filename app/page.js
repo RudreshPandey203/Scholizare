@@ -8,15 +8,8 @@ export default function Home() {
 		<div>
 			<nav className="xl:px-16 px-2 py-3 flex xl:justify-between  items-center drop-shadow-xl border-b-2 flex-wrap">
 				<div className=" text-7xl text-primary/50 ">Scholizare</div>
-				<Link href="/teacher/signin/">
-					<button className="rounded-lg font-semibold text-lg w-60 drop-shadow-lg h-16 btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-primary  hover:bg-primary group">
-						{/* purple box */}
-						<span className="w-0 h-0 rounded-lg bg-white absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></span>
-						<span className="w-full text-white transition-colors duration-300 ease-in-out group-hover:text-primary z-10">
-							Join as Teacher
-						</span>
-					</button>
-				</Link>
+				<Link className='text-primary underline' href="/about">Know More</Link>
+				
 			</nav>
 			<main className="flex md:justify-between justify-center items-center xl:px-16  pb-8 flex-wrap-reverse ">
 				<div className="flex flex-col justify-center py-8 ">
@@ -53,6 +46,28 @@ export default function Home() {
 							</svg>
 							</span>
 						</Link>
+						<Link href="/teacher/signin/">
+					<button className="ml-2 rounded-lg font-semibold text-lg w-60 drop-shadow-lg h-16 btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-primary  hover:bg-primary group">
+						{/* purple box */}
+						<span className="w-0 h-0 rounded-lg bg-white absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></span>
+						<span className="inline-flex items-center justify-center gap-2  w-full text-white transition-colors duration-300 ease-in-out group-hover:text-primary z-10">
+							Join as Teacher
+							<svg
+							className='group-hover:fill-primary'
+								width="11"
+								height="10"
+								viewBox="0 0 11 10"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M5.27654 0.21934C5.41869 0.0788896 5.61138 0 5.81228 0C6.01318 0 6.20587 0.0788896 6.34801 0.21934L10.644 4.46934C10.786 4.60997 10.8657 4.80059 10.8657 4.99934C10.8657 5.19809 10.786 5.38871 10.644 5.52934L6.34801 9.77934C6.20421 9.91175 6.01412 9.98385 5.8177 9.9805C5.62128 9.97714 5.43383 9.89858 5.29474 9.76134C5.15601 9.62374 5.0766 9.43829 5.07321 9.24397C5.06982 9.04965 5.1427 8.8616 5.27654 8.71934L8.27868 5.74934L0.758164 5.74934C0.557099 5.74934 0.36427 5.67032 0.222095 5.52967C0.079921 5.38902 4.76837e-05 5.19825 4.76837e-05 4.99934C4.76837e-05 4.80043 0.079921 4.60966 0.222095 4.46901C0.36427 4.32836 0.557099 4.24934 0.758164 4.24934L8.27868 4.24934L5.27654 1.27934C5.13457 1.13871 5.05483 0.948091 5.05483 0.74934C5.05483 0.550589 5.13457 0.359965 5.27654 0.21934Z"
+									fill="white"
+								/>
+							</svg>
+						</span>
+					</button>
+				</Link>
 					</div>
 				</div>
 				<div className="">
