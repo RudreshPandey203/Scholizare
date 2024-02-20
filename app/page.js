@@ -25,7 +25,7 @@ export default function Home() {
 					</div>
 					<div>
 						<Link
-							className="relative inline-flex items-center justify-center overflow-hidden transition-all bg-primary  hover:bg-primary group mt-8  w-60 h-16 rounded-lg text-white font-semibold text-lg drop-shadow-lg duration-300 ease-in-out gap-2"
+							className="relative inline-flex items-center justify-center overflow-hidden transition-all bg-primary  hover:bg-primary group mt-8  w-48 h-16 rounded-lg text-white font-semibold text-lg drop-shadow-lg duration-300 ease-in-out gap-2"
 							href="/student/signin/"
 						>
 							<span className="w-0 h-0 rounded-lg bg-white absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></span>
@@ -47,7 +47,7 @@ export default function Home() {
 							</span>
 						</Link>
 						<Link href="/teacher/signin/">
-					<button className="ml-2 rounded-lg font-semibold text-lg w-60 drop-shadow-lg h-16 btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-primary  hover:bg-primary group">
+					<button className="ml-2 rounded-lg font-semibold text-lg w-48 drop-shadow-lg h-16 btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-primary  hover:bg-primary group">
 						{/* purple box */}
 						<span className="w-0 h-0 rounded-lg bg-white absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></span>
 						<span className="inline-flex items-center justify-center gap-2  w-full text-white transition-colors duration-300 ease-in-out group-hover:text-primary z-10">
@@ -80,7 +80,7 @@ export default function Home() {
 				</div>
 			</main>
 			<div className="flex justify-evenly h-content flex-wrap">
-				<div class="w-72 h-content bg-[#E8E8E8]/30  shadow-md rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300">
+				<div class="w-72 h-content bg-secondary  shadow-md rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300">
 					<Image
 						src="/first.png"
 						alt="Teacher Image"
@@ -91,7 +91,7 @@ export default function Home() {
 						Solve Doubts
 					</div>
 				</div>
-				<div class="w-72 h-content bg-[#E8E8E8]/30  shadow-md rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300">
+				<div class="w-72 h-content bg-secondary  shadow-md rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300">
 					<Image
 						src="/second.png"
 						alt="Teacher Image"
@@ -102,7 +102,7 @@ export default function Home() {
 						Nearest Tuitions
 					</div>
 				</div>
-				<div class="w-72 h-content bg-[#E8E8E8]/30  shadow-md rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300">
+				<div class="w-72 h-content bg-secondary   shadow-md rounded-2xl flex flex-col justify-center items-center gap-1 group cursor-pointer hover:scale-105 ease-in-out duration-300">
 					<Image
 						src="/third.png"
 						alt="Teacher Image"
