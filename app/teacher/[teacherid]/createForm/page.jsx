@@ -482,7 +482,7 @@ const RegisterCourseForm = () => {
               </button>
           </div>
         </form>
-        <div className="h-100vh flex justify-start items-center flex-col  xl:gap-9">
+        <div className="h-100vh w-full md:flex justify-start items-center flex-col  xl:gap-9">
         <LoadScript
           googleMapsApiKey={
             process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY
