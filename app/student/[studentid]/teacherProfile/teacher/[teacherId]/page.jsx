@@ -79,10 +79,13 @@ function page({ params }) {
             </div>
           </div>
           {courses && (
-            <div className="h-48 bg-red-500">
-              {courses.map((course) => (
-                <div key={course._id}>{course.courseName}</div>
-              ))}
+            <div className="h-48">
+                {courses.map((course) => (
+                    <div>
+                        <h1>{course.courseName}</h1>
+                    </div>
+                ))
+                }
             </div>
           )}
         </div>
