@@ -83,19 +83,19 @@ const Signup = () => {
             <input
                 type="text"
                 placeholder="Full Name"
-                className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1 w-full"
+                className="border-2 rounded-md shadow outline-p-2none placeholder:text-xl placeholder:text-black px-3 py-1 w-full"
                 onChange={(e) => setName(e.target.value)}
             />
           <input
             type="text"
             placeholder="Email"
-            className="border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1 w-full"
+            className="border-2 rounded-md shadow outline-p-2none placeholder:text-xl placeholder:text-black px-3 py-1 w-full"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
-            className="w-full border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+            className="w-full border-2 rounded-md shadow outline-p-2none placeholder:text-xl placeholder:text-black px-3 py-1"
             onChange={(e) => setPassword(e.target.value)}
           />
           <button

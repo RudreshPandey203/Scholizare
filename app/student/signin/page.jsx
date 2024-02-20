@@ -64,7 +64,7 @@ const Login = () => {
           <input
             type="text"
             placeholder="Username"
-            className="w-full border-2 rounded-md shadow-xl outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+            className="w-full border-2 rounded-md shadow-xl outline-p-2none placeholder:text-xl placeholder:text-black px-3 py-1"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -72,7 +72,7 @@ const Login = () => {
           <input
             type="password"
             placeholder="Password"
-            className="w-full border-2 rounded-md shadow outline-p-2none placeholder:text-2xl placeholder:text-black px-3 py-1"
+            className="w-full border-2 rounded-md shadow outline-p-2none placeholder:text-xl placeholder:text-black px-3 py-1"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
