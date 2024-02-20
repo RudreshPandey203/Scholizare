@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Siderbar from "@/components/Siderbar";
+import Siderbar from "@/public/components/Siderbar";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { auth } from "@/app/firebase/config";
@@ -26,7 +26,7 @@ function Page({ params }) {
         if (userSnap.exists()) {
           setUserData(userSnap.data());
           const courses = userSnap.data().courses;
-          console.log("coursse list: ", courses);
+          console.log("course list: ", courses);
           if (courses) {
             console.log("reached here");
             const coursesRef = collection(db, "courses");

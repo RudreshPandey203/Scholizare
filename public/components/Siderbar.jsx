@@ -37,8 +37,8 @@ function Sidebar({ params }) {
     { title: 'Dashboard', href: `/student/${params.studentid}` },
     { title: 'Video Summary', href: `/student/${params.studentid}/videoSummarize` },
     { title: 'Search Tuitions', href: `/student/${params.studentid}/search` },
-    { title: 'Solve Doubts', href: 'http://localhost:4000/' },
-    { title: 'Wellness', href: '/wellness-route' },
+    { title: 'Solve Doubts', href: 'https://scholizare-gemini-doubt-bot.onrender.com/' },
+    { title: 'Wellness', href: 'https://scholizare-gemini-health-bot.onrender.com/' },
   ];
 
   const icons = {

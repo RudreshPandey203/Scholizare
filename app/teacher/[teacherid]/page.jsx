@@ -152,7 +152,8 @@ console.log(formattedDate);
 						Schoolz provides trained, passionate tutors to support the students
 						with recovery from unfinished learning,remediation and enrichment!
 					</div>
-					<div class="group w-40 h-14 text-white text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+					<Link class="group w-40 h-14 text-white text-xl font-normal font-jacques  bg-primary rounded-2xl drop-shadow-md hover:bg-blue-600	 flex justify-center items-center gap-1"
+					href={`calendar1/`}
                     >
 						Check Calender
 						<svg
@@ -168,7 +169,7 @@ console.log(formattedDate);
 								fill="white"
 							/>
 						</svg>
-					</div>
+					</Link>
 					</div>
 					<div>
 					<Image

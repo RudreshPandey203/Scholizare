@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Siderbar from "@/components/Siderbar";
+import Siderbar from "@/public/components/Siderbar";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../../../firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
