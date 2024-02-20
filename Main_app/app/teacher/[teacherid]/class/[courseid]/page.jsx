@@ -278,7 +278,7 @@ const Page = ({ params }) => {
       
       <button
   onClick={() => window.open("https://meet.google.com/", "_blank")}
-  className="w-42 text-white rounded-lg p-5 m-auto bg-primary"
+  className="w-42 text-white absolute top-4 right-4 rounded-lg p-5 m-auto bg-primary"
 >
   Generate Google Meet link
 </button>
