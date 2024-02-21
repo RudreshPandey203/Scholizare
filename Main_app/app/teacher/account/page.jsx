@@ -27,7 +27,6 @@ const libraries = ["places"]; // Add the "places" library
 const Page = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
-  // const userSession = sessionStorage.getItem("user");
   const userSession = typeof window !== 'undefined' ? sessionStorage.getItem("user") : null;
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -48,7 +47,6 @@ const Page = () => {
     school: "",
   });
 
-  console.log("usersession", userSession)
 
 
   const getAddressComponent = (addressComponents, type) => {
