@@ -227,8 +227,12 @@ const Page = () => {
     fetchUserData();
   }, [user, userSession]);
 
-  if (!user && !userSession) {
+  try{
+    if (!user && !userSession) {
     router.replace("/teacher/signup");
+  }}
+  catch(error){
+    console.log("error:", error);
   }
 
   return (

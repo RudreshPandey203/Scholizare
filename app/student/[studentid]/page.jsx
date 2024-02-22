@@ -122,7 +122,7 @@ function Page({ params }) {
         <div className="flex justify-end h-fit">
           <Link
             href={{
-              pathname: "/student/account",
+              pathname: `/student/account`,
             }}
           >
             <svg
