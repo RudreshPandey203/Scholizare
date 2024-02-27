@@ -33,6 +33,6 @@ This project is licensed under the [MIT License](LICENSE). -->
 
 ## Contact
 
-- Author: Your Name
-- Email: your-email@example.com
+- Author: Scholizare Team
+- Email: pandeyrudresh203@gmail.com
 - GitHub: [Your GitHub Profile](https://github.com/RudreshPandey203)
