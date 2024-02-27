@@ -1,5 +1,3 @@
-Scholizare 
-Deployed Link: https://scholizare-firebase-lm9d.vercel.app/
 # Scholizare
 
 [![Deployed Link](https://scholizare-firebase-lm9d.vercel.app/](https://scholizare-firebase-lm9d.vercel.app/)

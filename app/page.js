@@ -7,7 +7,7 @@ export default function Home() {
 	return (
 		<div>
 			<nav className="xl:px-16 px-2 py-3 flex xl:justify-between  items-center drop-shadow-xl border-b-2 flex-wrap">
-				<div className=" text-7xl text-primary/50 "><img className='w-32' src='/scholizare-bg-icon.png'/></div>
+				<div className="bg-[#141646] items-center flex justify-center rounded-full text-7xl text-primary/50 "><img className='w-32' src='/ScholizareLogo.png'/></div>
 				<Link className='text-primary underline' href="/about">Know More</Link>
 				
 			</nav>

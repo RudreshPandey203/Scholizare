@@ -71,7 +71,7 @@ function Sidebar({ params }) {
 
   return (
     <div className="flex flex-col items-center justify-normal gap-40 bg-secondary w-80 h-full pt-6 rounded-3xl">
-      <img className="w-48 h-16" src="/icon.png" alt="Icon"></img>
+      <div className="bg-[#141646] items-center flex justify-center rounded-full m-3 text-7xl text-primary/50 "><img className='w-32' src='/ScholizareLogo.png'/></div>
       <div className="flex flex-col justify-between h-72">
         {menuItems.map((menuItem, index) => (
           <Link
