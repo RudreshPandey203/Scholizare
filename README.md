@@ -45,7 +45,7 @@ Scholizare is a platform designed to revolutionize the education experience by p
 
 ## Contact Us✉️ 
 
-Have questions, feedback, or suggestions? We'd love to hear from you! Reach out to us at contact@scholizare.com .
+Have questions, feedback, or suggestions? We'd love to hear from you! Reach out to us at pandeyrudresh203@gmail.com .
 
 
 
